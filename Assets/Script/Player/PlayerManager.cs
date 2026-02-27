@@ -23,6 +23,6 @@ public class PlayerManager : ActionListManager
 
     private void Start()
     {
-        
+        actionList.AddAction(new MoveAction(this.gameObject, Vector3.zero, 0.5f).Easer(Easing.EaseOutBounce));
     }
 }
