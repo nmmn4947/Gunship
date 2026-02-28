@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5909781bbc2596f4b8005e7d5a9426da, type: 3}
+  m_Name: ShipBig
+  m_EditorClassIdentifier: Gunship::ShipData
+  shipSkinPrefab: {fileID: 3741327757779467363, guid: 7c048649e20b816408ea11fbe78092e7, type: 3}
+  shipName: Big
+  maxAcceleration: 7.5
+  timeUntilMaxAcceleration: 1.2
+  maxAngularAcceleration: 25
+  timeUntilMaxAngularAcceleration: 0.75
