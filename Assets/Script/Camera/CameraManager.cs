@@ -15,7 +15,7 @@ public class CameraManager : ActionListManager
     private float borderTop;
     private float borderDown;
 
-    private float DEFAULTDURATION = 0.75f;
+    private float DEFAULTDURATION = 1f;
 
     void Start()
     {
@@ -23,8 +23,8 @@ public class CameraManager : ActionListManager
 
         borderLeft  = _camera.ViewportToWorldPoint(new Vector3(0.25f, 0, 0)).x;
         borderRight = _camera.ViewportToWorldPoint(new Vector3(0.75f, 0, 0)).x;
-        borderDown  = _camera.ViewportToWorldPoint(new Vector3(0, 0.25f, 0)).y; 
-        borderTop   = _camera.ViewportToWorldPoint(new Vector3(0, 0.75f, 0)).y;
+        borderDown  = _camera.ViewportToWorldPoint(new Vector3(0, 0.45f, 0)).y; 
+        borderTop   = _camera.ViewportToWorldPoint(new Vector3(0, 0.55f, 0)).y;
         
         target = new GameObject("Target").transform;
     }
@@ -38,11 +38,15 @@ public class CameraManager : ActionListManager
     {
         target.position = CalculateTargetPosition();
         if (target.position.x < borderLeft ||
-            target.position.x > borderRight ||
-            target.position.y < borderTop ||
-            target.position.y > borderDown)
+            target.position.x > borderRight)
         {
             actionList.AddAction(new MoveToTargetAction(_camera.gameObject, DEFAULTDURATION, target).DontMoveZ().Easer(Easing.EaseOutSine));
+        }
+
+        if (target.position.y < borderTop ||
+            target.position.y > borderDown)
+        {
+            actionList.AddAction(new MoveToTargetAction(_camera.gameObject, DEFAULTDURATION/2f, target).DontMoveZ().Easer(Easing.EaseOutSine));
         }
     }
 

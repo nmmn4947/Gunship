@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5909781bbc2596f4b8005e7d5a9426da, type: 3}
   m_Name: ShipBig
   m_EditorClassIdentifier: Gunship::ShipData
-  shipSkinPrefab: {fileID: 3741327757779467363, guid: 7c048649e20b816408ea11fbe78092e7, type: 3}
+  shipSkinPrefab: {fileID: 3741327757779467363, guid: 8326e2878c839774eb3795cd01e82613, type: 3}
   shipName: Big
-  maxAcceleration: 7.5
-  timeUntilMaxAcceleration: 1.2
-  maxAngularAcceleration: 25
-  timeUntilMaxAngularAcceleration: 0.75
+  maxSpeed: 7.5
+  maxAcceleration: 3
+  timeUntilMaxAcceleration: 4
+  dragForce: 5
+  maxAngularAcceleration: 5
+  timeUntilMaxAngularAcceleration: 2
+  pulseMaxPower: 100
+  pulseChargeDuration: 10

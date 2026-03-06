@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Gunship::ShipData
   shipSkinPrefab: {fileID: 3741327757779467363, guid: 7c048649e20b816408ea11fbe78092e7, type: 3}
   shipName: Small
-  maxAcceleration: 15
-  timeUntilMaxAcceleration: 1.25
+  maxSpeed: 20
+  maxAcceleration: 6
+  timeUntilMaxAcceleration: 0.25
+  dragForce: 10
   maxAngularAcceleration: 10
   timeUntilMaxAngularAcceleration: 1
+  pulseMaxPower: 25
+  pulseChargeDuration: 1
