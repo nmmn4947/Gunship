@@ -18,7 +18,6 @@ MonoBehaviour:
   maxAcceleration: 3
   timeUntilMaxAcceleration: 4
   dragForce: 5
-  maxAngularAcceleration: 5
-  timeUntilMaxAngularAcceleration: 2
+  torque: 12.5
   pulseMaxPower: 100
-  pulseChargeDuration: 10
+  pulseChargeDuration: 4

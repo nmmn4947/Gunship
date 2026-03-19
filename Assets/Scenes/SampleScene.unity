@@ -5660,7 +5660,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1931120216}
   - component: {fileID: 1931120218}
-  - component: {fileID: 1931120220}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5698,23 +5697,10 @@ MonoBehaviour:
   timeMultiplier: 1
   moveInput: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   shiftInput: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  playerMovement: {fileID: 1931120220}
   allShips:
   - {fileID: 11400000, guid: 082cf1443f7332e40aea9ba1d409d3e5, type: 2}
   - {fileID: 11400000, guid: ae8c286a93c24694d9d4791095e304e1, type: 2}
   - {fileID: 11400000, guid: 0e2f95252c21d5344ba671382e1d2fef, type: 2}
---- !u!114 &1931120220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931120215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2074be96463b1f45a6b48113e6aba62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Gunship::PlayerMovement
 --- !u!224 &850700297322493605
 RectTransform:
   m_ObjectHideFlags: 0

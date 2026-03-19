@@ -8,8 +8,9 @@ public class PlayerManager : ActionListManager
 {
     [SerializeField] private InputActionReference moveInput;
     [SerializeField] private InputActionReference shiftInput;
-    [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private List<ShipData> allShips;
+    private PlayerMovement playerMovement = new PlayerMovement();
+    private PlayerChaingun playerChaingun = new PlayerChaingun();
     private ShipData _currentShipData;
     private GameObject _spawnedShip;
 
@@ -62,6 +63,7 @@ public class PlayerManager : ActionListManager
             playerMovement.Accelerates(moveInput.action.ReadValue<Vector2>().y);
         }
         playerMovement.AngularAccelerates(moveInput.action.ReadValue<Vector2>().x);
+        playerMovement.RunMovement();
     }
 
     private void HandlingShipSwitch()

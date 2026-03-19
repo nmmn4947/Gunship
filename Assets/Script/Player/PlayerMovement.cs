@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement
 {
     //The philosophy here is to have functions about moving only
     //and let the manager choose what to do
@@ -21,8 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private float jerk = 0.0f;
     
     private bool isAccelerating = false;
-
-    private float oldInput = 0f;
+    private bool isCharging = false;
     public void SetUp(GameObject ship, ShipData data)
     {
         playerRB2D = ship.GetComponent<Rigidbody2D>();
@@ -32,12 +31,14 @@ public class PlayerMovement : MonoBehaviour
         direction = playerTransform.up;
     }
 
-    private void FixedUpdate()
+    public void RunMovement()
     {
         Drag();
         currentSpeed += currentAcceleration * Time.fixedDeltaTime;
-        playerRB2D.linearVelocity = direction * currentSpeed;
-        Debug.Log(currentSpeed + ":" + currentAcceleration);
+        if (!isCharging)
+        {
+            playerRB2D.linearVelocity = playerTransform.up * currentSpeed;
+        }
     }
 
     //Jerk -> just to lerp the acceleration
@@ -55,25 +56,19 @@ public class PlayerMovement : MonoBehaviour
             isAccelerating = false;
             return;
         }
+        else
+        {
+            if (moveInput > 0.0f)
+            {
+                moveInput = 1.0f;
+            }
+            else
+            {
+                moveInput = -1.0f;
+            }
+        }
         
         isAccelerating = true;
-
-        float checkInput = 0f;
-        if (moveInput > 0.5f)
-        {
-            direction = playerTransform.up;
-            checkInput = 1f;
-        }
-        else if (moveInput < -0.5f)
-        {
-            direction = -playerTransform.up;
-            checkInput = -1f;
-        }
-        
-        /*if (!Mathf.Approximately(oldInput, checkInput))
-        {
-            currentSpeed = 0;
-        }*/
         
         accelerationTimer += Time.fixedDeltaTime;
         if (Mathf.Abs(currentAcceleration) >= currentShip.maxAcceleration)
@@ -82,24 +77,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            jerk = maxJerk;
+            jerk = moveInput * maxJerk;
         }
 
         if (currentSpeed < currentShip.maxSpeed)
         {
             currentAcceleration += jerk * Time.fixedDeltaTime;
-        }
-
-        
-        if (moveInput > 0.5f)
-        {
-            direction = playerTransform.up;
-            oldInput = 1f;
-        }
-        else if (moveInput < -0.5f)
-        {
-            direction = -playerTransform.up;
-            oldInput = -1f;
         }
     }
 
@@ -142,12 +125,13 @@ public class PlayerMovement : MonoBehaviour
             moveInput = 1.0f;
         }
         
-        playerRB2D.AddTorque(-moveInput * currentShip.maxAngularAcceleration);
+        playerRB2D.AddTorque(-moveInput * currentShip.torque);
     }
 
     public void DriftPulseCharge()
     {
         pulseChargeTimer += Time.deltaTime;
+        isCharging = true;
         pulsePower = Mathf.Lerp(0.0f, currentShip.pulseMaxPower, pulseChargeTimer/currentShip.pulseChargeDuration);
     }
 
@@ -156,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
         //playerRB2D.AddForce(playerTransform.up * pulsePower, ForceMode2D.Impulse);
         direction = playerTransform.up;
         pulseChargeTimer = 0f;
+        isCharging = false;
         currentSpeed += pulsePower;
     }
 
