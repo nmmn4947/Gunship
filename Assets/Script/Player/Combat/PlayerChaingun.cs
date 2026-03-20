@@ -3,39 +3,45 @@ using UnityEngine;
 public class PlayerChaingun
 {
     private ShipData shipData;
-    private float currentFireRate = 0;
     private float timer;
     private GameObject playerObj;
-    private float stopShootingThreshold = 3;
+    private bool pressedOnce;
+    private float currentMultiplier;
     
     public void SetUp(GameObject player, ShipData shipData)
     {
         playerObj = player;
         this.shipData = shipData;
-        currentFireRate = stopShootingThreshold;
+        currentMultiplier = 0;
     }
     
     public void UpdateGun()
     {
-        timer -= Time.deltaTime; // should be +
-        if (timer < 0 && currentFireRate > 0 && currentFireRate < stopShootingThreshold)
+        timer += Time.deltaTime * currentMultiplier; // should be +
+        if (timer > shipData.maxFireRate)
         {
             //fire a gun
             Object.Instantiate(shipData.bulletPrefab, playerObj.transform.position, playerObj.transform.rotation);
-            timer = currentFireRate;
+            timer -= shipData.maxFireRate;
         }
     }
-
+    
     public void RampHandlingChainGun(bool isRampUp)
     {
         if (isRampUp)
         {
-            currentFireRate = Mathf.MoveTowards(currentFireRate, shipData.maxFireTimeEachShot, shipData.rampUpSpeed * Time.deltaTime);
+            currentMultiplier = Mathf.MoveTowards(currentMultiplier, shipData.maxRampUp, shipData.rampUpStepMultiplier * Time.deltaTime);
+            /*if (!pressedOnce)
+            {
+                Object.Instantiate(shipData.bulletPrefab, playerObj.transform.position, playerObj.transform.rotation);
+                pressedOnce = true;
+            }*/
         }
         else
         {
-            currentFireRate = Mathf.MoveTowards(currentFireRate, stopShootingThreshold + 1, shipData.rampDownSpeed * Time.deltaTime);
+            currentMultiplier = Mathf.MoveTowards(currentMultiplier, 0, shipData.rampDownStepMultiplier * Time.deltaTime);
+            //pressedOnce = false;
         }
-        Debug.Log(currentFireRate);
+        //Debug.Log(currentFireRate);
     }
 }

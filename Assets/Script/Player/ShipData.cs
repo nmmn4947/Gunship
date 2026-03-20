@@ -20,9 +20,10 @@ public class ShipData : ScriptableObject
 
     
     [Header("Chain Gun")] 
-    public float maxFireTimeEachShot;
-    public float rampUpSpeed;
-    public float rampDownSpeed;
+    public float maxFireRate;
+    public float maxRampUp;
+    public float rampUpStepMultiplier;
+    public float rampDownStepMultiplier;
 
     [Header("Missiles")] 
     public int missileCount;

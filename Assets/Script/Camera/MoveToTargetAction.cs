@@ -31,7 +31,6 @@ public class MoveToTargetAction : Napadol.Tools.ActionPattern.Action
         Vector3 newPos = new Vector3();
 
         newPos = dontMoveZ ? new Vector3(target.position.x, target.position.y, originalPosition.z) : new Vector3(target.position.x, target.position.y, target.position.z);
-        
         subject.transform.position = Vector3.LerpUnclamped(originalPosition, newPos, easingTimePasses);
         return percentageDone >= 1f;
     }

@@ -88,7 +88,6 @@ public class PlayerMovement
 
     private void Drag()
     {
-        
         if (isAccelerating)
         {
             if (currentSpeed >= currentShip.maxSpeed)

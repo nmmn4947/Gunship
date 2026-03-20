@@ -183,6 +183,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1376721220034526759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5667468541745178702}
+  m_Layer: 0
+  m_Name: Spawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5667468541745178702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376721220034526759}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.42261827, w: 0.9063079}
+  m_LocalPosition: {x: -0.274, y: 0.039, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9086417937557466700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 50}
 --- !u!1 &2192823729680618700
 GameObject:
   m_ObjectHideFlags: 0
@@ -5030,6 +5061,7 @@ GameObject:
   - component: {fileID: 9086417937557466700}
   - component: {fileID: 4085381830075559843}
   - component: {fileID: 1337556916914193346}
+  - component: {fileID: 4454262705498596626}
   m_Layer: 0
   m_Name: ShipSmall
   m_TagString: Untagged
@@ -5053,6 +5085,8 @@ Transform:
   - {fileID: 4704208353784940857}
   - {fileID: 2472082975973556688}
   - {fileID: 1499001763619140266}
+  - {fileID: 1809889742723389659}
+  - {fileID: 5667468541745178702}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4085381830075559843
@@ -5118,6 +5152,55 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &4454262705498596626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3741327757779467363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b3ea99984a4504498a246753879295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::PlayerMissiles
+  shipData: {fileID: 11400000, guid: 082cf1443f7332e40aea9ba1d409d3e5, type: 2}
+  spawnPoints:
+  - {fileID: 1809889742723389659}
+  - {fileID: 5667468541745178702}
+  missilePrefab: {fileID: 4614426250223272345, guid: c86f9313567fe2047acd4eac3c644355, type: 3}
+  missileCooldown: 2
+--- !u!1 &6935681188815155262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809889742723389659}
+  m_Layer: 0
+  m_Name: Spawn1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1809889742723389659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935681188815155262}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.42261827, w: 0.9063079}
+  m_LocalPosition: {x: 0.245, y: 0.069, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9086417937557466700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50}
 --- !u!1 &7604272978532309671
 GameObject:
   m_ObjectHideFlags: 0
