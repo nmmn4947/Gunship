@@ -15,12 +15,14 @@ public class ShipData : ScriptableObject
     public float pulseChargeDuration;
 
     [Header("Combat General")] 
+    public GameObject bulletPrefab;
     public int maxHealth;
+
     
     [Header("Chain Gun")] 
-    public float maxFireRate;
-    public float rampUpDuration;
-    public float rampDownDuration;
+    public float maxFireTimeEachShot;
+    public float rampUpSpeed;
+    public float rampDownSpeed;
 
     [Header("Missiles")] 
     public int missileCount;

@@ -8,6 +8,7 @@ public class PlayerManager : ActionListManager
 {
     [SerializeField] private InputActionReference moveInput;
     [SerializeField] private InputActionReference shiftInput;
+    [SerializeField] private InputActionReference spaceInput;
     [SerializeField] private List<ShipData> allShips;
     private PlayerMovement playerMovement = new PlayerMovement();
     private PlayerChaingun playerChaingun = new PlayerChaingun();
@@ -23,12 +24,14 @@ public class PlayerManager : ActionListManager
     {
         moveInput.action.Enable();
         shiftInput.action.Enable();
+        spaceInput.action.Enable();
     }
 
     private void OnDisable()
     {
         moveInput.action.Disable();
         shiftInput.action.Disable();
+        spaceInput.action.Disable();
     }
 
     #endregion
@@ -52,7 +55,10 @@ public class PlayerManager : ActionListManager
             playerMovement.DriftPulse();
             _isHoldingShift = false;
         }
-
+        
+        playerChaingun.RampHandlingChainGun(spaceInput.action.IsPressed());
+        playerChaingun.UpdateGun();
+        
         HandlingShipSwitch();
     }
 
@@ -63,7 +69,7 @@ public class PlayerManager : ActionListManager
             playerMovement.Accelerates(moveInput.action.ReadValue<Vector2>().y);
         }
         playerMovement.AngularAccelerates(moveInput.action.ReadValue<Vector2>().x);
-        playerMovement.RunMovement();
+        playerMovement.UpdateMovement();
     }
 
     private void HandlingShipSwitch()
@@ -94,5 +100,6 @@ public class PlayerManager : ActionListManager
         
         _spawnedShip = Instantiate(allShips[i].shipSkinPrefab);
         playerMovement.SetUp(_spawnedShip, _currentShipData);
+        playerChaingun.SetUp(_spawnedShip, _currentShipData);
     }
 }

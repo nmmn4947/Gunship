@@ -31,7 +31,7 @@ public class PlayerMovement
         direction = playerTransform.up;
     }
 
-    public void RunMovement()
+    public void UpdateMovement()
     {
         Drag();
         currentSpeed += currentAcceleration * Time.fixedDeltaTime;

@@ -21,3 +21,9 @@ MonoBehaviour:
   torque: 10
   pulseMaxPower: 25
   pulseChargeDuration: 1
+  bulletPrefab: {fileID: 3371961621029761184, guid: 317b3f311fb0f324bb84bc967b44f641, type: 3}
+  maxHealth: 0
+  maxFireTimeEachShot: 0.1
+  rampUpSpeed: 1
+  rampDownSpeed: 2
+  missileCount: 0
