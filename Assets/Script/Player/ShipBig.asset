@@ -16,8 +16,17 @@ MonoBehaviour:
   shipName: Big
   maxSpeed: 7.5
   maxAcceleration: 3
-  timeUntilMaxAcceleration: 4
+  timeUntilMaxAcceleration: 7
   dragForce: 5
-  torque: 12.5
-  pulseMaxPower: 100
+  torque: 5
+  pulseMaxPower: 50
   pulseChargeDuration: 4
+  bulletPrefab: {fileID: 3371961621029761184, guid: 317b3f311fb0f324bb84bc967b44f641, type: 3}
+  colliderRadius: 1.863993
+  maxHealth: 0
+  maxFireRate: 0.1
+  maxRampUp: 1.5
+  rampUpStepMultiplier: 0.15
+  rampDownStepMultiplier: 0.5
+  maxConeShotOffset: 0.35
+  missileCount: 0

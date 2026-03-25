@@ -11,7 +11,7 @@ public class PlayerManager : ActionListManager
     [SerializeField] private InputActionReference spaceInput;
     [SerializeField] private InputActionReference enterInput;
     [SerializeField] private List<ShipData> allShips;
-    private PlayerMovement playerMovement = new PlayerMovement();
+    public PlayerMovement playerMovement = new PlayerMovement();
     private PlayerChaingun playerChaingun = new PlayerChaingun();
     private PlayerMissiles playerMissiles;
     
@@ -20,6 +20,8 @@ public class PlayerManager : ActionListManager
 
     private bool _isAutomatedTest;
     private bool _isHoldingShift = false;
+    private Rigidbody2D rb2D;
+    private CircleCollider2D playerCollider;
     
     #region InputSetup
 
@@ -43,13 +45,15 @@ public class PlayerManager : ActionListManager
     
     private void Start()
     {
+        rb2D = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<CircleCollider2D>();
         AssignNewShip(0);
     }
 
     protected override void Update()
     {
         base.Update();
-        this.gameObject.transform.position = _spawnedShip.transform.position;
+        //this.gameObject.transform.position = _spawnedShip.transform.position;
         if (shiftInput.action.IsPressed())
         {
             playerMovement.DriftPulseCharge();
@@ -108,10 +112,11 @@ public class PlayerManager : ActionListManager
         
         playerMovement.ResetMovement();
         
-        _spawnedShip = Instantiate(allShips[i].shipSkinPrefab);
-        playerMovement.SetUp(_spawnedShip, _currentShipData);
+        _spawnedShip = Instantiate(allShips[i].shipSkinPrefab, this.transform);
+        playerMovement.SetUp(_spawnedShip, _currentShipData, rb2D);
         playerChaingun.SetUp(_spawnedShip, _currentShipData);
         
         playerMissiles = _spawnedShip.GetComponent<PlayerMissiles>();
+        playerCollider.radius = _currentShipData.colliderRadius;
     }
 }

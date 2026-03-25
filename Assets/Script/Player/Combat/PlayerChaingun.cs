@@ -1,4 +1,5 @@
 using UnityEngine;
+using Napadol.Tools;
 
 public class PlayerChaingun
 {
@@ -21,7 +22,11 @@ public class PlayerChaingun
         if (timer > shipData.maxFireRate)
         {
             //fire a gun
-            Object.Instantiate(shipData.bulletPrefab, playerObj.transform.position, playerObj.transform.rotation);
+            float currentCone = Mathf.Lerp(0, shipData.maxConeShotOffset, Easing.EaseInCirc(currentMultiplier/shipData.maxRampUp));
+            float offset = UnityEngine.Random.Range(-currentCone, currentCone);
+            Quaternion shootRot = new Quaternion(playerObj.transform.rotation.x, playerObj.transform.rotation.y, playerObj.transform.rotation.z + offset,  playerObj.transform.rotation.w);
+            Object.Instantiate(shipData.bulletPrefab, playerObj.transform.position, shootRot);
+            //BulletPool.instance.SpawnBullet(playerObj.transform.position, shootRot);
             timer -= shipData.maxFireRate;
         }
     }

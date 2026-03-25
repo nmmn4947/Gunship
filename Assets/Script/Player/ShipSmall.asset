@@ -22,9 +22,11 @@ MonoBehaviour:
   pulseMaxPower: 25
   pulseChargeDuration: 1
   bulletPrefab: {fileID: 3371961621029761184, guid: 317b3f311fb0f324bb84bc967b44f641, type: 3}
+  colliderRadius: 0.5
   maxHealth: 0
-  maxFireRate: 0.1
-  maxRampUp: 2
+  maxFireRate: 0.3
+  maxRampUp: 1
   rampUpStepMultiplier: 0.5
   rampDownStepMultiplier: 1
+  maxConeShotOffset: 0.1
   missileCount: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Napadol.Tools;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class CameraManager : ActionListManager
 {
@@ -36,8 +37,9 @@ public class CameraManager : ActionListManager
     private void LateUpdate()
     {
         target.position = CalculateTargetPosition();
-        actionList.AddAction(new MoveToTargetAction(_camera.gameObject, DEFAULTDURATION, target).DontMoveZ().Easer(Easing.EaseOutSine));
-        
+        //actionList.AddAction(new MoveToTargetAction(_camera.gameObject, DEFAULTDURATION, target).DontMoveZ().Easer(Easing.EaseOutSine));
+
+        MoveTowardsTargetWithBoundary(target.position);
     }
 
     private Vector3 CalculateTargetPosition()
@@ -84,33 +86,71 @@ public class CameraManager : ActionListManager
             targetPosition.y > borderTop)
         {
             float newSize = Vector2.Distance(_camera.gameObject.transform.position, targetPosition);
-            if (newSize < 12f)
+            if (newSize < 10f)
             {
-                newSize = 12f;
+                newSize = 10f;
             }
             _camera.orthographicSize = Mathf.MoveTowards(_camera.orthographicSize,  newSize, (newSize) * Time.deltaTime);
         }
         else
         {
-            _camera.orthographicSize = Mathf.MoveTowards(_camera.orthographicSize, 12, 3f * Time.deltaTime);
+            _camera.orthographicSize = Mathf.MoveTowards(_camera.orthographicSize, 10, 3f * Time.deltaTime);
         }
     }
 
     private void ExpandDependOnVelocity(Vector3 targetPosition)
     {
-        currentVelocity = playerManager._spawnedShip.GetComponent<Rigidbody2D>().linearVelocity.magnitude;
-        if (currentVelocity > playerManager._currentShipData.maxSpeed)
+        currentVelocity = playerManager.gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude;
+        /*if (currentVelocity > playerManager._currentShipData.maxSpeed)
         {
             float newSize = Vector2.Distance(_camera.gameObject.transform.position, targetPosition);
             if (newSize < 12f)
             {
                 newSize = 12f;
             }
+
+            if (currentVelocity > 0 && currentVelocity < 5)
+            {
+                newSize = 12 + currentVelocity;
+            }
             _camera.orthographicSize = Mathf.MoveTowards(_camera.orthographicSize,  newSize, (currentVelocity) * Time.deltaTime);
         }
         else
         {
             _camera.orthographicSize = Mathf.MoveTowards(_camera.orthographicSize, 12, currentVelocity * Time.deltaTime);
+        }*/
+        float newValue = Mathf.Lerp(0, 10, currentVelocity / 100f);
+        _camera.orthographicSize = Mathf.MoveTowards(_camera.orthographicSize,  10 + newValue, (currentVelocity) * Time.deltaTime);
+    }
+
+    private void MoveTowardsTargetWithBoundary(Vector3 targetPosition)
+    {
+        float left = _camera.ViewportToWorldPoint(new Vector3(0f, 0, 0)).x;
+        float right = _camera.ViewportToWorldPoint(new Vector3(1f, 0, 0)).x;
+        float bot = _camera.ViewportToWorldPoint(new Vector3(0, 0f, 0)).y; 
+        float top = _camera.ViewportToWorldPoint(new Vector3(0, 1f, 0)).y;
+        
+        float step = ((currentVelocity*0.75f) + Vector3.Distance(targetPosition, _camera.transform.position)) * Time.deltaTime;
+        /*if (Vector3.Distance(targetPosition, _camera.transform.position) > 10f)
+        {
+            step = (currentVelocity + Vector3.Distance(targetPosition, _camera.transform.position)) * Time.deltaTime;
         }
+        else
+        {
+            step = currentVelocity * Time.deltaTime;
+        }*/
+        
+        float halfWidth  = (right - left) / 2f;
+        float halfHeight = (top - bot) / 2f;
+        
+        float x = Mathf.MoveTowards(_camera.transform.position.x, targetPosition.x, step);
+        x = Mathf.Clamp(x, -100f + halfWidth, 100f - halfWidth);
+        
+        float y = Mathf.MoveTowards(_camera.transform.position.y, targetPosition.y, step);
+        y = Mathf.Clamp(y, -100f + halfHeight, 100f - halfHeight);
+
+        
+        Vector3 newPos = new Vector3(x,y, _camera.transform.position.z);
+        _camera.transform.position = newPos;
     }
 }

@@ -22,23 +22,35 @@ public class PlayerMovement
     
     private bool isAccelerating = false;
     private bool isCharging = false;
-    public void SetUp(GameObject ship, ShipData data)
+    private Vector2 knockbackVelocity = Vector2.zero;
+    
+    public void SetUp(GameObject ship, ShipData data, Rigidbody2D playerRB)
     {
-        playerRB2D = ship.GetComponent<Rigidbody2D>();
+        playerRB2D = playerRB;
         playerTransform = ship.GetComponent<Transform>();
         currentShip = data;
         maxJerk = data.maxSpeed / data.timeUntilMaxAcceleration;
-        direction = playerTransform.up;
     }
 
     public void UpdateMovement()
     {
         Drag();
         currentSpeed += currentAcceleration * Time.fixedDeltaTime;
+        
+        knockbackVelocity = Vector2.MoveTowards(knockbackVelocity, Vector2.zero, 25f * Time.fixedDeltaTime);
+        
         if (!isCharging)
         {
-            playerRB2D.linearVelocity = playerTransform.up * currentSpeed;
+            Vector2 finalVelocity = ((Vector2)playerTransform.up * currentSpeed) + knockbackVelocity;
+            finalVelocity = Vector2.ClampMagnitude(finalVelocity, currentShip.maxSpeed);
+            playerRB2D.linearVelocity = finalVelocity;
+            
         }
+    }
+    
+    public void ApplyKnockback(Vector2 force)
+    {
+        knockbackVelocity += force;
     }
 
     //Jerk -> just to lerp the acceleration

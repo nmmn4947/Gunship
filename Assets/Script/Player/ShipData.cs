@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "ShipData", menuName = "Scriptable Objects/ShipData")]
 public class ShipData : ScriptableObject
@@ -16,6 +17,7 @@ public class ShipData : ScriptableObject
 
     [Header("Combat General")] 
     public GameObject bulletPrefab;
+    public float colliderRadius;
     public int maxHealth;
 
     
@@ -24,6 +26,7 @@ public class ShipData : ScriptableObject
     public float maxRampUp;
     public float rampUpStepMultiplier;
     public float rampDownStepMultiplier;
+    public float maxConeShotOffset = 0.5f;
 
     [Header("Missiles")] 
     public int missileCount;

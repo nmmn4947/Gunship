@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Gunship::BulletManager
   speed: 50
+  lifeTime: 2
 --- !u!61 &1413029115814369229
 BoxCollider2D:
   m_ObjectHideFlags: 0

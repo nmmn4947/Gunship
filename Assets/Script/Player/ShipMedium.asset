@@ -18,6 +18,15 @@ MonoBehaviour:
   maxAcceleration: 4.5
   timeUntilMaxAcceleration: 1.75
   dragForce: 7.5
-  torque: 11.25
-  pulseMaxPower: 50
+  torque: 7.5
+  pulseMaxPower: 35
   pulseChargeDuration: 2
+  bulletPrefab: {fileID: 3371961621029761184, guid: 317b3f311fb0f324bb84bc967b44f641, type: 3}
+  colliderRadius: 0.9117988
+  maxHealth: 0
+  maxFireRate: 0.3
+  maxRampUp: 2
+  rampUpStepMultiplier: 0.35
+  rampDownStepMultiplier: 1
+  maxConeShotOffset: 0.25
+  missileCount: 0
