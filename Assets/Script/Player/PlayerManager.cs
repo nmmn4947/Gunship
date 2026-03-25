@@ -11,6 +11,8 @@ public class PlayerManager : ActionListManager
     [SerializeField] private InputActionReference spaceInput;
     [SerializeField] private InputActionReference enterInput;
     [SerializeField] private List<ShipData> allShips;
+    [SerializeField] private Health playerHealth;
+    
     public PlayerMovement playerMovement = new PlayerMovement();
     private PlayerChaingun playerChaingun = new PlayerChaingun();
     private PlayerMissiles playerMissiles;

@@ -6618,6 +6618,7 @@ GameObject:
   - component: {fileID: 1931120218}
   - component: {fileID: 1931120219}
   - component: {fileID: 1931120220}
+  - component: {fileID: 1931120221}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6661,6 +6662,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 082cf1443f7332e40aea9ba1d409d3e5, type: 2}
   - {fileID: 11400000, guid: ae8c286a93c24694d9d4791095e304e1, type: 2}
   - {fileID: 11400000, guid: 0e2f95252c21d5344ba671382e1d2fef, type: 2}
+  playerHealth: {fileID: 1931120221}
   _currentShipData: {fileID: 0}
   _spawnedShip: {fileID: 0}
 --- !u!50 &1931120219
@@ -6726,6 +6728,24 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &1931120221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931120215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56d90299e266e142b17bc93ddae3fe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::Health
+  currentHealth: 0
+  maxHealth: 10
+  combatTeam: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &850700297322493605
 RectTransform:
   m_ObjectHideFlags: 0
