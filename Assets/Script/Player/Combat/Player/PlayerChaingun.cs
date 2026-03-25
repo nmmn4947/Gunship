@@ -25,7 +25,8 @@ public class PlayerChaingun
             float currentCone = Mathf.Lerp(0, shipData.maxConeShotOffset, Easing.EaseInCirc(currentMultiplier/shipData.maxRampUp));
             float offset = UnityEngine.Random.Range(-currentCone, currentCone);
             Quaternion shootRot = new Quaternion(playerObj.transform.rotation.x, playerObj.transform.rotation.y, playerObj.transform.rotation.z + offset,  playerObj.transform.rotation.w);
-            Object.Instantiate(shipData.bulletPrefab, playerObj.transform.position, shootRot);
+            GameObject spwn = Object.Instantiate(shipData.bulletPrefab, playerObj.transform.position, shootRot);
+            spwn.GetComponent<SimpleDamager>().combatTeam = Health.CombatTeam.Player;
             //BulletPool.instance.SpawnBullet(playerObj.transform.position, shootRot);
             timer -= shipData.maxFireRate;
         }

@@ -13,12 +13,9 @@ public class MissileMovement : MonoBehaviour
     
     private float currentAcceleration = 0;
     private float currentSpeed = 0;
-    
-    private PLACEHOLDER_TARGET placeholderTarget;
 
     private void Start()
     {
-        placeholderTarget = PLACEHOLDER_TARGET.instance;
         rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -37,7 +34,7 @@ public class MissileMovement : MonoBehaviour
 
     private void Rotates()
     {
-        Vector2 dir = placeholderTarget.transform.position - transform.position;
+        Vector2 dir = target.transform.position - transform.position;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         float angleDiff = Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle);
 
@@ -55,6 +52,5 @@ public class MissileMovement : MonoBehaviour
             currentSpeed += currentAcceleration * Time.fixedDeltaTime;
         }
         rb2D.linearVelocity = this.transform.up * currentSpeed;
-        Debug.Log(rb2D.linearVelocity.magnitude);
     }
 }

@@ -38,7 +38,7 @@ public class PlayerMovement
         currentSpeed += currentAcceleration * Time.fixedDeltaTime;
         
         knockbackVelocity = Vector2.MoveTowards(knockbackVelocity, Vector2.zero, 25f * Time.fixedDeltaTime);
-        
+
         if (!isCharging)
         {
             Vector2 finalVelocity = ((Vector2)playerTransform.up * currentSpeed) + knockbackVelocity;

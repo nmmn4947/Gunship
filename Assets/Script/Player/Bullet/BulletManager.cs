@@ -21,8 +21,13 @@ public class BulletManager : MonoBehaviour
         if (timer >= lifeTime)
         {
             //this.gameObject.SetActive(false);
-            Destroy(gameObject);
+            KillBullet();
         }
+    }
+
+    public void KillBullet()
+    {
+        Destroy(gameObject);
     }
 
     /*private void OnEnable()
