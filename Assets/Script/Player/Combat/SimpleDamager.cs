@@ -31,4 +31,28 @@ public class SimpleDamager : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Health health = other.gameObject.GetComponent<Health>();
+        if (health != null)
+        {
+            if (health.combatTeam != combatTeam)
+            {
+                health.TakeDamage(damage);
+                //apply knockback
+                Vector2 dir = (Vector2)other.transform.position - (Vector2)this.transform.position;
+                switch (health.combatTeam)
+                {
+                    case Health.CombatTeam.Player:
+                        health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 10f);
+                        break;
+                    case Health.CombatTeam.Enemy:
+                        other.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * 2f, ForceMode2D.Impulse);
+                        break;
+                }
+                hitSomething?.Invoke();
+            }
+        }
+    }
 }

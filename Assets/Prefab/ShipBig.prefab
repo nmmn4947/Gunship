@@ -5122,6 +5122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9086417937557466700}
   - component: {fileID: 8055003049602872098}
+  - component: {fileID: 647196624920601135}
   m_Layer: 0
   m_Name: ShipBig
   m_TagString: Untagged
@@ -5175,6 +5176,19 @@ MonoBehaviour:
   - {fileID: 1280241174080164300}
   missilePrefab: {fileID: 4614426250223272345, guid: c86f9313567fe2047acd4eac3c644355, type: 3}
   missileCooldown: 2
+--- !u!114 &647196624920601135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3741327757779467363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4699909cd828e4fba756e683316cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::PlayerVisualManager
+  playerSkin: {fileID: 6927114768790881952}
 --- !u!1 &4072857116130099377
 GameObject:
   m_ObjectHideFlags: 0
