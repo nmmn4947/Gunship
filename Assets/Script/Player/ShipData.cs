@@ -19,6 +19,8 @@ public class ShipData : ScriptableObject
     public GameObject bulletPrefab;
     public float colliderRadius;
     public int maxHealth;
+    public float regenCooldown;
+    public int regenAmount;
 
     
     [Header("Chain Gun")] 

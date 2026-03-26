@@ -23,7 +23,9 @@ MonoBehaviour:
   pulseChargeDuration: 4
   bulletPrefab: {fileID: 3371961621029761184, guid: 317b3f311fb0f324bb84bc967b44f641, type: 3}
   colliderRadius: 1.863993
-  maxHealth: 0
+  maxHealth: 40
+  regenCooldown: 8
+  regenAmount: 2
   maxFireRate: 0.1
   maxRampUp: 1.5
   rampUpStepMultiplier: 0.15

@@ -12,11 +12,11 @@ public class PlayerManager : ActionListManager
     [SerializeField] private InputActionReference enterInput;
     [SerializeField] private List<ShipData> allShips;
     [SerializeField] private Health playerHealth;
-    
+
     public PlayerMovement playerMovement = new PlayerMovement();
     private PlayerChaingun playerChaingun = new PlayerChaingun();
     private PlayerMissiles playerMissiles;
-    
+
     [HideInInspector] public ShipData _currentShipData;
     [HideInInspector] public GameObject _spawnedShip;
 
@@ -24,7 +24,8 @@ public class PlayerManager : ActionListManager
     private bool _isHoldingShift = false;
     private Rigidbody2D rb2D;
     private CircleCollider2D playerCollider;
-    
+    private float regenTimer = 0f;
+
     #region InputSetup
 
     private void OnEnable()
@@ -44,7 +45,7 @@ public class PlayerManager : ActionListManager
     }
 
     #endregion
-    
+
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -56,26 +57,42 @@ public class PlayerManager : ActionListManager
     {
         base.Update();
         //this.gameObject.transform.position = _spawnedShip.transform.position;
+
+        //movement
         if (shiftInput.action.IsPressed())
         {
             playerMovement.DriftPulseCharge();
             _isHoldingShift = true;
         }
-        else if(shiftInput.action.WasReleasedThisFrame())
+        else if (shiftInput.action.WasReleasedThisFrame())
         {
             playerMovement.DriftPulse();
             _isHoldingShift = false;
         }
-        
+
+        //Combat
         playerChaingun.RampHandlingChainGun(spaceInput.action.IsPressed());
         playerChaingun.UpdateGun();
-
         if (enterInput.action.IsPressed())
         {
             playerMissiles.SpawnMissiles();
         }
-        
-        HandlingShipSwitch();
+
+        //regen
+        if (!playerHealth.IsMaxHealth())
+        {
+            regenTimer += Time.unscaledDeltaTime;
+        }
+
+        if (regenTimer >= _currentShipData.regenCooldown)
+        {
+            playerHealth.Heal(_currentShipData.regenAmount);
+            regenTimer = 0f;
+        }
+
+        UpdateLowHealthEffect();
+
+        HandlingShipSwitch(); //switching ships
     }
 
     private void FixedUpdate()
@@ -84,6 +101,7 @@ public class PlayerManager : ActionListManager
         {
             playerMovement.Accelerates(moveInput.action.ReadValue<Vector2>().y);
         }
+
         playerMovement.AngularAccelerates(moveInput.action.ReadValue<Vector2>().x);
         playerMovement.UpdateMovement();
     }
@@ -94,10 +112,12 @@ public class PlayerManager : ActionListManager
         {
             AssignNewShip(0);
         }
+
         if (Input.GetKeyUp(KeyCode.Alpha2))
         {
             AssignNewShip(1);
         }
+
         if (Input.GetKeyUp(KeyCode.Alpha3))
         {
             AssignNewShip(2);
@@ -111,15 +131,35 @@ public class PlayerManager : ActionListManager
         {
             Destroy(_spawnedShip);
         }
-        
+
         playerMovement.ResetMovement();
-        
+
         _spawnedShip = Instantiate(allShips[i].shipSkinPrefab, this.transform);
         playerMovement.SetUp(_spawnedShip, _currentShipData, rb2D);
         playerChaingun.SetUp(_spawnedShip, _currentShipData);
-        
+
         playerMissiles = _spawnedShip.GetComponent<PlayerMissiles>();
         playerCollider.radius = _currentShipData.colliderRadius;
+
+        playerHealth.maxHealth = (_currentShipData.maxHealth);
+        playerHealth.FullHeal();
+    }
+
+    public void HurtVisual()
+    {
+        _spawnedShip.GetComponent<PlayerVisualManager>().HurtVisual();
+    }
+
+    private void UpdateLowHealthEffect()
+    {
+        if (playerHealth.isLowHealth)
+        {
+            Time.timeScale = 0.5f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
     
 }

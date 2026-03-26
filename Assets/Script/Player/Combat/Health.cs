@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth;
-    
+
     public enum CombatTeam
     {
         Player,
@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     public UnityEvent onDeath;
     
     [HideInInspector] public bool isLowHealth = false;
+    [SerializeField] private GameObject smokeEffect;
     
     private void Start()
     {
@@ -26,7 +27,7 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        if (currentHealth/maxHealth < 0.25f)
+        if ((float)currentHealth/maxHealth < 0.3f)
         {
             isLowHealth = true;
         }
@@ -34,8 +35,14 @@ public class Health : MonoBehaviour
         {
             isLowHealth = false;
         }
+        smokeEffect.SetActive(isLowHealth);
     }
 
+    public bool IsMaxHealth()
+    {
+        return currentHealth == maxHealth;
+    }
+    
     public void FullHeal()
     {
         currentHealth = maxHealth;
