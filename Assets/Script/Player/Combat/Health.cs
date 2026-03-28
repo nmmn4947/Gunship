@@ -25,6 +25,11 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    public float GetLowPercentage()
+    {
+        return ((float)currentHealth / maxHealth)/0.3f;
+    }
+    
     private void Update()
     {
         if ((float)currentHealth/maxHealth < 0.3f)

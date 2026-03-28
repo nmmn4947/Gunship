@@ -99,10 +99,10 @@ public class PlayerManager : ActionListManager
     {
         if (!_isHoldingShift)
         {
-            playerMovement.Accelerates(moveInput.action.ReadValue<Vector2>().y);
+            playerMovement.Accelerates(moveInput.action.ReadValue<Vector2>().y, playerHealth.isLowHealth);
         }
 
-        playerMovement.AngularAccelerates(moveInput.action.ReadValue<Vector2>().x);
+        playerMovement.AngularAccelerates(moveInput.action.ReadValue<Vector2>().x, playerHealth.isLowHealth);
         playerMovement.UpdateMovement();
     }
 
@@ -152,14 +152,7 @@ public class PlayerManager : ActionListManager
 
     private void UpdateLowHealthEffect()
     {
-        if (playerHealth.isLowHealth)
-        {
-            Time.timeScale = 0.5f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+        Time.timeScale = Mathf.Lerp(0.3f, 1.0f, playerHealth.GetLowPercentage());
     }
     
 }

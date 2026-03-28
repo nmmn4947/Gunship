@@ -45,6 +45,7 @@ public class PlayerMovement
             finalVelocity = Vector2.ClampMagnitude(finalVelocity, currentShip.maxSpeed);
             playerRB2D.linearVelocity = finalVelocity;
             
+            //playerRB2D.AddForce(playerTransform.up * 5f,  ForceMode2D.Force);
         }
     }
     
@@ -54,7 +55,7 @@ public class PlayerMovement
     }
 
     //Jerk -> just to lerp the acceleration
-    public void Accelerates(float moveInput)
+    public void Accelerates(float moveInput, bool isLow)
     {
         if (currentSpeed > currentShip.maxSpeed)
         {
@@ -73,10 +74,18 @@ public class PlayerMovement
             if (moveInput > 0.0f)
             {
                 moveInput = 1.0f;
+                if (isLow)
+                {
+                    moveInput *= 0.5f;
+                }
             }
             else
             {
                 moveInput = -1.0f;
+                if (isLow)
+                {
+                    moveInput *= 0.5f;
+                }
             }
         }
         
@@ -118,7 +127,7 @@ public class PlayerMovement
         }
     }
 
-    public void AngularAccelerates(float moveInput)
+    public void AngularAccelerates(float moveInput, bool isLow)
     {
         if (moveInput >= -0.001f && moveInput <= 0.001f)
         {
@@ -127,13 +136,21 @@ public class PlayerMovement
         }
         
         //if moveInput is < 0.9 meaning A or D and W or S is press at the same time 
-        if (moveInput > -0.9f && moveInput < 0f)
+        if (moveInput < 0f)
         {
             moveInput = -1.0f;
+            if (isLow)
+            {
+                moveInput *= 0.5f;
+            }
         }
-        else if (moveInput < 0.9f && moveInput > 0f)
+        else
         {
             moveInput = 1.0f;
+            if (isLow)
+            {
+                moveInput *= 0.5f;
+            }
         }
         
         playerRB2D.AddTorque(-moveInput * currentShip.torque);
