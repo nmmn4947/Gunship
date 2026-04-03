@@ -41,9 +41,6 @@ public class AnnouncerManager : ActionListManager
         _originalLinePos = line1.GetComponent<RectTransform>().anchoredPosition;
         _scaleLine1 = line1.GetComponent<RectTransform>().localScale;
         _scaleLine2 = line2.GetComponent<RectTransform>().localScale;
-
-        Announce("Announced");
-        Announce("Twice");
     }
 
     public void Announce(string txt)

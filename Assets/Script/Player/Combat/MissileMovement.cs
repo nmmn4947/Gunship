@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MissileMovement : MonoBehaviour
@@ -10,18 +11,54 @@ public class MissileMovement : MonoBehaviour
     
     private Transform target;
     private Rigidbody2D rb2D;
+    private MissileManager missileManager;
     
+    private float angularSpeedMultiplier = 1;
     private float currentAcceleration = 0;
     private float currentSpeed = 0;
 
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        FindTarget();
+        missileManager = GetComponent<MissileManager>();
     }
 
     private void Update()
     {
+        if (!target.gameObject.activeInHierarchy || target == null)
+        {
+            FindTarget();
+        }
+    }
+
+    private void FindTarget()
+    {
+        List<Transform> targets = new List<Transform>();
+        Transform bossPos = FindAnyObjectByType<BossManager>(FindObjectsInactive.Exclude).transform;
+        targets.Add(bossPos);
         
+        EnemyManager[] enemyships = FindObjectsByType<EnemyManager>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (var enemy in enemyships)
+        {
+            targets.Add(enemy.gameObject.transform);
+        }
+        
+        float dist = float.MaxValue;
+        foreach (var enemy in targets)
+        {
+            float currDist = Vector3.Distance(this.transform.position, enemy.transform.position);
+            if (dist > currDist)
+            {
+                target = enemy.transform;
+                dist = currDist;
+            }
+        }
+
+        if (target == null)
+        {
+            missileManager.KillMissile();
+        }
     }
     
     private void Accelerates()
@@ -39,8 +76,9 @@ public class MissileMovement : MonoBehaviour
         float angleDiff = Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle);
 
         // Rotate directly instead of AddTorque
-        float rotation = Mathf.Clamp(angleDiff, -maxAngularSpeed, maxAngularSpeed) * Time.fixedDeltaTime;
+        float rotation = Mathf.Clamp(angleDiff, -maxAngularSpeed, maxAngularSpeed) * Time.fixedDeltaTime * angularSpeedMultiplier;
         transform.Rotate(0, 0, rotation);
+        angularSpeedMultiplier += Time.fixedDeltaTime;
     }
     
     private void FixedUpdate()
