@@ -25,6 +25,7 @@ public class EnemyShipSpawner : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= cooldownTime)
         {
+            AnnouncerManager.instance.Announce("The Boss has Spawn Enemy-ships.");
             SpawnEnemyShip();
             SpawnEnemyShip();
             SpawnEnemyShip();

@@ -144,6 +144,9 @@ public class PlayerManager : ActionListManager
 
         playerHealth.maxHealth = (_currentShipData.maxHealth);
         playerHealth.FullHeal();
+
+        string s = _spawnedShip.gameObject.name.Replace("(Clone)", "");
+        AnnouncerManager.instance.Announce(s + " is Spawned.");
     }
 
     public void HurtVisual()

@@ -45,6 +45,7 @@ public class AnnouncerManager : ActionListManager
 
     public void Announce(string txt)
     {
+       
         actionList.AddAction(new CallBackAction(() => ChangeText(txt), nameof(ChangeText))); 
         
         actionList.AddAction(new ScaleAction(line1, Vector3.one, 0.25f).Easer(Easing.EaseOutQuad));
@@ -54,7 +55,7 @@ public class AnnouncerManager : ActionListManager
         actionList.AddAction(new MoveRectTransformAction(line2, bot.anchoredPosition, 0.25f).Easer(Easing.EaseLinear));
         actionList.AddAction(new ScaleAction(announcerObj, Vector3.one, 0.25f).Easer(Easing.EaseLinear).Block());
         
-        actionList.AddAction(new WaitAction(0.5f));
+        actionList.AddAction(new WaitAction(1f));
         
         actionList.AddAction(new MoveRectTransformAction(line1, _originalLinePos, 0.25f).Easer(Easing.EaseInOutBack));
         actionList.AddAction(new MoveRectTransformAction(line2, _originalLinePos, 0.25f).Easer(Easing.EaseInOutBack));

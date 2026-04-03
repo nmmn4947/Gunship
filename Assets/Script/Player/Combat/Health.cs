@@ -75,7 +75,8 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
-            if(announce) AnnouncerManager.instance.Announce(this.gameObject.name + " is Dead.");
+            string s = this.gameObject.name.Replace("(Clone)", "");
+            if(announce) AnnouncerManager.instance.Announce(s + " is Dead.");
             
             onDeath?.Invoke();
         }
