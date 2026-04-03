@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2137811507275633061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8401014244813222900}
+  - component: {fileID: 1095937065047499511}
+  m_Layer: 6
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8401014244813222900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137811507275633061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8094566644046191900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1095937065047499511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137811507275633061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059629a51e6769948bada5af297cd126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::SpawnBullet
+  bulletPrefab: {fileID: 3371961621029761184, guid: 7c22bafc54d6631419438f53bbfec16e, type: 3}
+  timeBetweenBullets: 3
 --- !u!1 &2846548378715637170
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,6 +84,7 @@ Transform:
   - {fileID: 4138387422009476528}
   - {fileID: 279671127291219074}
   - {fileID: 8283449556643585628}
+  - {fileID: 8401014244813222900}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8465820296653376380
@@ -52,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452b9bf90cd6c8b4daeb23e3562024ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Gunship::EnemyManager
+  rotateSpeed: 30
 --- !u!58 &7472112979494569853
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -68,7 +116,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -381,7 +429,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2370219927294891556, guid: 5aab96d07fc00e94b9bade32660e2b09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

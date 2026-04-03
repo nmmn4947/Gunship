@@ -30,6 +30,16 @@ public class BulletManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void StopBullet()
+    {
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+    }
+    
+    public void FireBullet()
+    {
+        GetComponent<Rigidbody2D>().linearVelocity = this.transform.up * speed;
+    }
+
     /*private void OnEnable()
     {
         timer = 0;

@@ -27,7 +27,7 @@ public class SimpleDamager : MonoBehaviour
                 switch (health.combatTeam)
                 {
                     case Health.CombatTeam.Player:
-                        health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 10f);
+                        health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 5f);
                         break;
                     case Health.CombatTeam.Enemy:
                         other.GetComponent<Rigidbody2D>().AddForce(dir * 2f, ForceMode2D.Impulse);

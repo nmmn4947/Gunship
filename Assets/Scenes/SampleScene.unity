@@ -332,6 +332,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1862074148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &414242938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 414242939}
+  m_Layer: 6
+  m_Name: spwn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &414242939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414242938}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.44, y: 0.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1170303034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &448671678
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,6 +5621,7 @@ GameObject:
   - component: {fileID: 511676148}
   - component: {fileID: 511676149}
   - component: {fileID: 511676150}
+  - component: {fileID: 511676151}
   m_Layer: 6
   m_Name: Right
   m_TagString: Untagged
@@ -5720,6 +5752,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 511676151}
+        m_TargetAssemblyTypeName: StarGunBulletSpawner, Gunship
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isLowHealth: 0
   smokeEffect: {fileID: 1702829073}
   announce: 0
@@ -5755,6 +5799,26 @@ MonoBehaviour:
   hitSomething:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &511676151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511676145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d66e2192a64a6a0469fe35d04ec00ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::StarGunBulletSpawner
+  bulletPrefab: {fileID: 4614426250223272345, guid: 94f4f273c76188b40b1c1f2f74c9e0fe, type: 3}
+  spwnPoint1: {fileID: 855159374}
+  spwnPoint2: {fileID: 414242939}
+  spwnPoint3: {fileID: 1540953346}
+  spwnPoint4: {fileID: 1643273165}
+  shootfrequencyTime: 0.1
+  shootDuration: 0.7
+  cooldownTime: 5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6495,6 +6559,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &855159373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 855159374}
+  m_Layer: 6
+  m_Name: spwn1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &855159374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855159373}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.42, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1170303034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &900098424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6709,6 +6804,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974818173}
   m_CullTransparentMesh: 1
+--- !u!1 &984785234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 984785235}
+  m_Layer: 6
+  m_Name: spwn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &984785235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984785234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.5, w: 0.8660254}
+  m_LocalPosition: {x: -0.05, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1603671011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60}
+--- !u!1 &997609630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 997609631}
+  m_Layer: 6
+  m_Name: spwn4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &997609631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997609630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.5, w: 0.8660254}
+  m_LocalPosition: {x: -0, y: -0.89, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1690007016}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -60}
 --- !u!1 &1011887798
 GameObject:
   m_ObjectHideFlags: 0
@@ -6823,6 +6980,7 @@ GameObject:
   - component: {fileID: 1025482542}
   - component: {fileID: 1025482543}
   - component: {fileID: 1025482544}
+  - component: {fileID: 1025482545}
   m_Layer: 6
   m_Name: BossManager
   m_TagString: Untagged
@@ -6838,8 +6996,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025482541}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.61, y: 5.25, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.8154029, w: 0.57889396}
+  m_LocalPosition: {x: -25.14, y: -0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6848,7 +7006,7 @@ Transform:
   - {fileID: 1934315952}
   - {fileID: 511676146}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -109.254}
 --- !u!114 &1025482543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6867,6 +7025,7 @@ MonoBehaviour:
   rightPart: {fileID: 511676145}
   player: {fileID: 1931120215}
   deadBulletTime: 3
+  isDead: 0
 --- !u!50 &1025482544
 Rigidbody2D:
   serializedVersion: 5
@@ -6894,6 +7053,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1025482545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025482541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb74b88693ea2042900c1ee72fd9ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::MissileMovement
+  _jerk: 3
+  maxAcceleration: 5
+  maxSpeed: 1
+  maxAngularSpeed: 2
+  isBoss: 1
 --- !u!1 &1063090156 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1015658583775855476, guid: ee986ee018090764bac97257d800a737, type: 3}
@@ -7144,6 +7320,65 @@ MonoBehaviour:
   force: 20
   justX: 0
   justY: 1
+--- !u!1 &1121945411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1121945412}
+  - component: {fileID: 1121945413}
+  m_Layer: 6
+  m_Name: spwnPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1121945412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121945411}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.57999563, y: 0.88000834, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1934315952}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1773428102 &1121945413
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121945411}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0.57999754, y: 0.8800074, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: -0.0000026226044, y: 1.1700077, z: 0}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1101746359}
+    weight: 1
 --- !u!114 &1144923386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7168,6 +7403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1170303034}
   - component: {fileID: 1170303033}
+  - component: {fileID: 1170303035}
   m_Layer: 6
   m_Name: star_medium_0
   m_TagString: Untagged
@@ -7246,9 +7482,35 @@ Transform:
   m_LocalPosition: {x: 1.87, y: 0.11, z: 0}
   m_LocalScale: {x: 4.255685, y: 4.255685, z: 4.255685}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 855159374}
+  - {fileID: 414242939}
+  - {fileID: 1540953346}
+  - {fileID: 1643273165}
   m_Father: {fileID: 511676146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1170303035
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170303032}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d925df04ac24694eb275c7495a07247, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1171195673
 GameObject:
   m_ObjectHideFlags: 0
@@ -7676,6 +7938,68 @@ MonoBehaviour:
   force: 20
   justX: 0
   justY: 1
+--- !u!1 &1417335833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1417335834}
+  m_Layer: 6
+  m_Name: spwn3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1417335834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417335833}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.5213538, w: 0.85334074}
+  m_LocalPosition: {x: 0.00025379658, y: 0.8801581, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1690007016}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -62.846}
+--- !u!1 &1540953345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1540953346}
+  m_Layer: 6
+  m_Name: spwn3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1540953346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540953345}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: -0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: -0.44, y: 0.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1170303034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -270}
 --- !u!1 &1545861366
 GameObject:
   m_ObjectHideFlags: 0
@@ -7896,7 +8220,9 @@ Transform:
   m_LocalPosition: {x: 1.44, y: -5.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2052787846}
+  - {fileID: 984785235}
   m_Father: {fileID: 1862074148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -13.301}
 --- !u!70 &1603671012
@@ -7966,6 +8292,37 @@ MonoBehaviour:
   hitSomething:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1643273164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1643273165}
+  m_Layer: 6
+  m_Name: spwn4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1643273165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643273164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: -0, y: -0.44, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1170303034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &1650473240
 GameObject:
   m_ObjectHideFlags: 0
@@ -8157,6 +8514,78 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 511676151}
+        m_TargetAssemblyTypeName: StarGunBulletSpawner, Gunship
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1934315957}
+        m_TargetAssemblyTypeName: ChargeGun, Gunship
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1862074152}
+        m_TargetAssemblyTypeName: EnemyShipSpawner, Gunship
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1862074151}
+        m_TargetAssemblyTypeName: UnityEngine.CircleCollider2D, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1934315953}
+        m_TargetAssemblyTypeName: UnityEngine.CircleCollider2D, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 511676147}
+        m_TargetAssemblyTypeName: UnityEngine.CircleCollider2D, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isLowHealth: 0
   smokeEffect: {fileID: 900098426}
   announce: 1
@@ -8187,7 +8616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e6b8114d79d0d41893c6e16f8d2931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Gunship::SimpleDamager
-  damage: 3
+  damage: 8
   combatTeam: 2
   hitSomething:
     m_PersistentCalls:
@@ -8219,13 +8648,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690007015}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.10739898, w: 0.994216}
-  m_LocalPosition: {x: -4.31, y: -5.28, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.9957423, w: -0.09218075}
+  m_LocalPosition: {x: -4.3538065, y: -5.2770967, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1417335834}
+  - {fileID: 997609631}
   m_Father: {fileID: 1862074148}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 12.331}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 190.578}
 --- !u!70 &1690007017
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -8586,6 +9017,7 @@ GameObject:
   - component: {fileID: 1862074149}
   - component: {fileID: 1862074150}
   - component: {fileID: 1862074151}
+  - component: {fileID: 1862074152}
   m_Layer: 6
   m_Name: Backs
   m_TagString: Untagged
@@ -8705,6 +9137,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1862074152}
+        m_TargetAssemblyTypeName: EnemyShipSpawner, Gunship
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isLowHealth: 0
   smokeEffect: {fileID: 556723419}
   announce: 0
@@ -8759,6 +9203,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -1.4442434, y: -5.2448835}
   m_Radius: 0.89526653
+--- !u!114 &1862074152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862074147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f868f1bb9023c604083d928d5dc00001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::EnemyShipSpawner
+  enemyShipPrefab: {fileID: 2846548378715637170, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
+  spawnPoints:
+  - {fileID: 2052787846}
+  - {fileID: 1417335834}
+  - {fileID: 984785235}
+  - {fileID: 997609631}
+  cooldownTime: 30
 --- !u!1 &1889679864
 GameObject:
   m_ObjectHideFlags: 0
@@ -8854,7 +9317,7 @@ GameObject:
   - component: {fileID: 1931120222}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9065,6 +9528,7 @@ GameObject:
   - component: {fileID: 1934315954}
   - component: {fileID: 1934315955}
   - component: {fileID: 1934315956}
+  - component: {fileID: 1934315957}
   m_Layer: 6
   m_Name: Left
   m_TagString: Untagged
@@ -9086,6 +9550,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1101746359}
+  - {fileID: 1121945412}
   - {fileID: 754110481}
   - {fileID: 1237861984}
   m_Father: {fileID: 1025482542}
@@ -9195,6 +9660,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1934315957}
+        m_TargetAssemblyTypeName: ChargeGun, Gunship
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isLowHealth: 0
   smokeEffect: {fileID: 1237861985}
   announce: 0
@@ -9230,6 +9707,24 @@ MonoBehaviour:
   hitSomething:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1934315957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934315951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f1379ed0be3c6459623d9a21ed060f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::ChargeGun
+  bulletPrefab: {fileID: 4614426250223272345, guid: 94f4f273c76188b40b1c1f2f74c9e0fe, type: 3}
+  spwnPoint: {fileID: 1121945412}
+  maxScaleBulletMultiplier: 4
+  gunSkinTransform: {fileID: 1101746359}
+  chargeDuration: 3
+  cooldownDuration: 7
 --- !u!1 &2007581941
 GameObject:
   m_ObjectHideFlags: 0
@@ -9305,6 +9800,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007581941}
   m_CullTransparentMesh: 1
+--- !u!1 &2052787845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052787846}
+  m_Layer: 6
+  m_Name: spwn1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2052787846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052787845}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.50273705, w: 0.8644394}
+  m_LocalPosition: {x: -0.04972911, y: -1.3202696, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1603671011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60.362}
 --- !u!224 &850700297322493605
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9510,67 +10036,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176787306073684107}
   m_CullTransparentMesh: 1
---- !u!1001 &5481208208562509688
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2846548378715637170, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_Name
-      value: EnemyShip
-      objectReference: {fileID: 0}
-    - target: {fileID: 3414599524962567507, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 519420033}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094566644046191900, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1e5f3c728c2d1d54789785647b22d262, type: 3}
 --- !u!224 &7902805820891708890
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9627,7 +10092,6 @@ SceneRoots:
   - {fileID: 1011887802}
   - {fileID: 1889679867}
   - {fileID: 538265365}
-  - {fileID: 5481208208562509688}
   - {fileID: 532368300}
   - {fileID: 1693080178}
   - {fileID: 1025482542}

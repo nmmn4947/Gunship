@@ -4,17 +4,17 @@ using UnityEngine;
 public class PlayerVisualManager : MonoBehaviour
 {
     [SerializeField] SpriteRenderer playerSkin;
-    private int anchorFrame;
+    private float anchorTime;
     
     public void HurtVisual()
     {
         playerSkin.color = Color.red;
-        anchorFrame = Time.frameCount;
+        anchorTime = Time.time;
     }
 
     private void Update()
     {
-        if (Time.frameCount >= anchorFrame + 4)
+        if (Time.time >= anchorTime + 0.1f)
         {
             playerSkin.color = Color.white;
         }

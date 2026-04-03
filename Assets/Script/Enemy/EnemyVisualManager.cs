@@ -4,12 +4,12 @@ public class EnemyVisualManager : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private GameObject _enemyExplosion;
-    private int framePivot;
+    private float timePivot;
 
     public void HurtVisual()
     {
         _spriteRenderer.color = Color.red;
-        framePivot = Time.frameCount;
+        timePivot = Time.time;
     }
 
     public void DeadExplosionSpawn()
@@ -19,7 +19,7 @@ public class EnemyVisualManager : MonoBehaviour
     
     void Update()
     {
-        if (Time.frameCount >= framePivot + 3)
+        if (Time.time >= timePivot + 0.1f)
         {
             _spriteRenderer.color = Color.white;
         }

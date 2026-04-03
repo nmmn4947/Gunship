@@ -10,8 +10,11 @@ public class BossManager : MonoBehaviour
     [SerializeField] private GameObject rightPart;
     [SerializeField] private GameObject player;
     [SerializeField] private float deadBulletTime;
+
+
+    [HideInInspector] public bool isDead = false;
     
-    BossMovement bossMovement = new BossMovement();
+    private BossMovement bossMovement = new BossMovement();
 
     private float timer = 0f;
     
@@ -43,6 +46,7 @@ public class BossManager : MonoBehaviour
 
     public void BossDiedTimeSlowDown()
     {
+        isDead = true;
         StartCoroutine(SlowTimeOnDeath());
     }
 

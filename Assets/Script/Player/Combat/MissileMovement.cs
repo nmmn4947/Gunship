@@ -8,6 +8,7 @@ public class MissileMovement : MonoBehaviour
     [SerializeField] private float maxAcceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxAngularSpeed;
+    [SerializeField] private bool isBoss;
     
     private Transform target;
     private Rigidbody2D rb2D;
@@ -20,29 +21,62 @@ public class MissileMovement : MonoBehaviour
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        FindTarget();
+        if (!isBoss)
+        {
+            FindTarget();
+        }
+        else
+        {
+            target = FindAnyObjectByType<PlayerManager>().transform;
+        }
         missileManager = GetComponent<MissileManager>();
+        
     }
 
     private void Update()
     {
-        if (!target.gameObject.activeInHierarchy || target == null)
+        if (!isBoss)
         {
-            FindTarget();
+            if (!target.gameObject.activeInHierarchy || target == null)
+            {
+                FindTarget();
+            }
+            BossManager boss = target.GetComponent<BossManager>();
+            if (boss != null)
+            {
+                if (boss.isDead)
+                {
+                    target = null;
+                    FindTarget();
+                }
+            }
         }
+        else
+        {
+            
+        }
+
+
+
     }
 
     private void FindTarget()
     {
         List<Transform> targets = new List<Transform>();
-        Transform bossPos = FindAnyObjectByType<BossManager>(FindObjectsInactive.Exclude).transform;
-        targets.Add(bossPos);
+        BossManager boss = FindAnyObjectByType<BossManager>(FindObjectsInactive.Exclude);
+        Transform bossPos = boss.transform;
+        if (!boss.isDead)
+        {
+            targets.Add(bossPos);
+        }
         
         EnemyManager[] enemyships = FindObjectsByType<EnemyManager>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach (var enemy in enemyships)
         {
             targets.Add(enemy.gameObject.transform);
         }
+
+        target = null;
         
         float dist = float.MaxValue;
         foreach (var enemy in targets)
@@ -57,6 +91,7 @@ public class MissileMovement : MonoBehaviour
 
         if (target == null)
         {
+            Debug.Log("Target is null");
             missileManager.KillMissile();
         }
     }
@@ -78,7 +113,14 @@ public class MissileMovement : MonoBehaviour
         // Rotate directly instead of AddTorque
         float rotation = Mathf.Clamp(angleDiff, -maxAngularSpeed, maxAngularSpeed) * Time.fixedDeltaTime * angularSpeedMultiplier;
         transform.Rotate(0, 0, rotation);
-        angularSpeedMultiplier += Time.fixedDeltaTime;
+        if (isBoss)
+        {
+            
+        }
+        else
+        {
+            angularSpeedMultiplier += Time.fixedDeltaTime;
+        }
     }
     
     private void FixedUpdate()
@@ -89,6 +131,14 @@ public class MissileMovement : MonoBehaviour
         {
             currentSpeed += currentAcceleration * Time.fixedDeltaTime;
         }
-        rb2D.linearVelocity = this.transform.up * currentSpeed;
+
+        if (!isBoss)
+        {
+            rb2D.linearVelocity = this.transform.up * currentSpeed;
+        }
+        else
+        {
+            rb2D.AddForce(this.transform.up * currentAcceleration, ForceMode2D.Force);
+        }
     }
 }

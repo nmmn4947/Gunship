@@ -7,12 +7,12 @@ public class BossHurtVisual : MonoBehaviour
     [SerializeField] private GameObject explosion;
     public Vector3 offsetKnock;
     private Color originalColor;
-    private int anchorFrame;
+    private float anchorTime;
     
     public void ApplyHurtVisual()
     {
         hurtSprite.color = Color.red;
-        anchorFrame = Time.frameCount;
+        anchorTime = Time.time;
     }
 
     public void SpawnExplosion()
@@ -27,7 +27,7 @@ public class BossHurtVisual : MonoBehaviour
 
     private void Update()
     {
-        if (Time.frameCount >= anchorFrame + 5)
+        if (Time.time >= anchorTime + 0.1f)
         {
             hurtSprite.color = originalColor;
         }
