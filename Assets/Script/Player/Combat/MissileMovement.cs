@@ -9,6 +9,21 @@ public class MissileMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxAngularSpeed;
     [SerializeField] private bool isBoss;
+
+    public void AddMaxSpeed(float m)
+    {
+        maxSpeed += m;
+    }
+
+    public void AddMaxAngularSpeed(float a)
+    {
+        maxAngularSpeed += a;
+    }
+    
+    public void AddAcceleration(float a)
+    {
+        maxAcceleration += a;
+    }
     
     private Transform target;
     private Rigidbody2D rb2D;

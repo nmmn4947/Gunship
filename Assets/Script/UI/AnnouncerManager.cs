@@ -3,6 +3,7 @@ using Napadol.Tools;
 using UnityEngine;
 using Napadol.Tools.ActionPattern;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class AnnouncerManager : ActionListManager
 {
@@ -29,6 +30,9 @@ public class AnnouncerManager : ActionListManager
     [SerializeField] private GameObject line2;
     [SerializeField] private RectTransform top;
     [SerializeField] private RectTransform bot;
+    [SerializeField] private TextMeshProUGUI spawningText;
+    [SerializeField] private Animator spawningAnimator;
+    [SerializeField] private AnimationClip spawningAnimation;
     
     private Vector3 _originalLinePos;
     private Vector3 _scaleLine1;
@@ -45,7 +49,8 @@ public class AnnouncerManager : ActionListManager
 
     public void Announce(string txt)
     {
-       
+        actionList.ClearActions();
+        
         actionList.AddAction(new CallBackAction(() => ChangeText(txt), nameof(ChangeText))); 
         
         actionList.AddAction(new ScaleAction(line1, Vector3.one, 0.25f).Easer(Easing.EaseOutQuad));
@@ -68,5 +73,11 @@ public class AnnouncerManager : ActionListManager
     private void ChangeText(string txt)
     {
         announcerText.text = txt;
+    }
+
+    public void SpawnSomething(string name)
+    {
+        spawningText.text = name;
+        spawningAnimator.Play(spawningAnimation.name, 0, 0f);
     }
 }

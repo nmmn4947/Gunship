@@ -13,6 +13,7 @@ public class PlayerManager : ActionListManager
     [SerializeField] private List<ShipData> allShips;
     [SerializeField] private Health playerHealth;
     [SerializeField] private GameObject explosionParticle;
+    [SerializeField] private float respawnTime;
 
     public PlayerMovement playerMovement = new PlayerMovement();
     private PlayerChaingun playerChaingun = new PlayerChaingun();
@@ -23,6 +24,8 @@ public class PlayerManager : ActionListManager
 
     private bool _isAutomatedTest;
     private bool _isHoldingShift = false;
+    private bool _isDead = false;
+    private float respawnTimer = 0;
     private Rigidbody2D rb2D;
     private CircleCollider2D playerCollider;
     private float regenTimer = 0f;
@@ -94,6 +97,20 @@ public class PlayerManager : ActionListManager
         UpdateLowHealthEffect();
 
         HandlingShipSwitch(); //switching ships
+        
+        //if dead
+        if (_isDead)
+        {
+            respawnTimer += Time.unscaledDeltaTime;
+            if (respawnTimer >= respawnTime)
+            {
+                respawnTimer = 0;
+                _isDead = false;
+                AssignNewShip(0);
+                playerMovement.ResetMovement();
+                playerHealth.ResetHealth();
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -109,6 +126,8 @@ public class PlayerManager : ActionListManager
 
     private void HandlingShipSwitch()
     {
+        if (_isDead) return;
+        
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
             AssignNewShip(0);
@@ -146,7 +165,7 @@ public class PlayerManager : ActionListManager
         playerHealth.FullHeal();
 
         string s = _spawnedShip.gameObject.name.Replace("(Clone)", "");
-        AnnouncerManager.instance.Announce(s + " is Spawned.");
+        AnnouncerManager.instance.SpawnSomething(s);
     }
 
     public void HurtVisual()
@@ -156,11 +175,25 @@ public class PlayerManager : ActionListManager
 
     private void UpdateLowHealthEffect()
     {
+        if (_isDead)
+        {
+            Time.timeScale = 1f;
+            return;
+        }
         Time.timeScale = Mathf.Lerp(0.3f, 1.0f, playerHealth.GetLowPercentage());
     }
 
     public void SpawnExplosion()
     {
         Instantiate(explosionParticle, this.transform.position, this.transform.rotation);
+    }
+
+    public void SetIsDead()
+    {
+        Destroy(_spawnedShip);
+        Time.timeScale = 1;
+        _isDead = true;
+        this.transform.position = Vector2.zero;
+        playerMovement.ResetMovement();
     }
 }

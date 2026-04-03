@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Napadol.Tools;
@@ -15,11 +16,20 @@ public class BossManager : MonoBehaviour
     [HideInInspector] public bool isDead = false;
     
     private BossMovement bossMovement = new BossMovement();
+    private MissileMovement mm;
 
     private float timer = 0f;
-    
+
+    private void Start()
+    {
+        mm = GetComponent<MissileMovement>();
+    }
+
     public void DisconnectParts(GameObject part)
     {
+        mm.AddMaxAngularSpeed(4);
+        mm.AddAcceleration(2);
+        mm.AddMaxSpeed(4);
         StartCoroutine(RunDisconnectParts(part));
     }
 

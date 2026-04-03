@@ -181,6 +181,7 @@ public class PlayerMovement
         playerRB2D.linearVelocity = Vector2.zero;
         currentSpeed = 0.0f;
         currentAcceleration = 0.0f;
+        knockbackVelocity = Vector2.zero;
         jerk = 0.0f;
     }
 }

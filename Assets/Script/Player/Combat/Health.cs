@@ -82,4 +82,9 @@ public class Health : MonoBehaviour
         }
         onDamaged?.Invoke();
     }
+
+    public void ResetHealth()
+    {
+        isDead = false;
+    }
 }
