@@ -14,7 +14,7 @@ public class PlayerVisualManager : MonoBehaviour
 
     private void Update()
     {
-        if (Time.frameCount >= anchorFrame + 2)
+        if (Time.frameCount >= anchorFrame + 4)
         {
             playerSkin.color = Color.white;
         }

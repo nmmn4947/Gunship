@@ -10,7 +10,8 @@ public class Health : MonoBehaviour
     public enum CombatTeam
     {
         Player,
-        Enemy
+        Enemy,
+        Boss
     }
     public CombatTeam combatTeam;
     
@@ -19,6 +20,9 @@ public class Health : MonoBehaviour
     
     [HideInInspector] public bool isLowHealth = false;
     [SerializeField] private GameObject smokeEffect;
+    [SerializeField] private bool announce = false;
+    
+    private bool isDead = false;
     
     private void Start()
     {
@@ -68,8 +72,11 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
+            isDead = true;
+            if(announce) AnnouncerManager.instance.Announce(this.gameObject.name + " is Dead.");
+            
             onDeath?.Invoke();
         }
         onDamaged?.Invoke();

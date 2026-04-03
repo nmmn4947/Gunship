@@ -12,6 +12,7 @@ public class PlayerManager : ActionListManager
     [SerializeField] private InputActionReference enterInput;
     [SerializeField] private List<ShipData> allShips;
     [SerializeField] private Health playerHealth;
+    [SerializeField] private GameObject explosionParticle;
 
     public PlayerMovement playerMovement = new PlayerMovement();
     private PlayerChaingun playerChaingun = new PlayerChaingun();
@@ -154,5 +155,9 @@ public class PlayerManager : ActionListManager
     {
         Time.timeScale = Mathf.Lerp(0.3f, 1.0f, playerHealth.GetLowPercentage());
     }
-    
+
+    public void SpawnExplosion()
+    {
+        Instantiate(explosionParticle, this.transform.position, this.transform.rotation);
+    }
 }

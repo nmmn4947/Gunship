@@ -11,6 +11,12 @@ public class SimpleDamager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Health health = other.GetComponent<Health>();
+        DamageRedirect damageRedirect = other.GetComponent<DamageRedirect>();
+        if (damageRedirect != null && health == null)
+        {
+            health = damageRedirect.redirectTo;
+        }
+        
         if (health != null)
         {
             if (health.combatTeam != combatTeam)
@@ -26,6 +32,8 @@ public class SimpleDamager : MonoBehaviour
                     case Health.CombatTeam.Enemy:
                         other.GetComponent<Rigidbody2D>().AddForce(dir * 2f, ForceMode2D.Impulse);
                         break;
+                    case Health.CombatTeam.Boss:
+                        break;
                 }
                 hitSomething?.Invoke();
             }
@@ -35,6 +43,12 @@ public class SimpleDamager : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         Health health = other.gameObject.GetComponent<Health>();
+        DamageRedirect damageRedirect = other.gameObject.GetComponent<DamageRedirect>();
+        if (damageRedirect != null && health == null)
+        {
+            health = damageRedirect.redirectTo;
+        }
+        
         if (health != null)
         {
             if (health.combatTeam != combatTeam)

@@ -45,7 +45,7 @@ public class PlayerMovement
             finalVelocity = Vector2.ClampMagnitude(finalVelocity, currentShip.maxSpeed);
             playerRB2D.linearVelocity = finalVelocity;
             
-            //playerRB2D.AddForce(playerTransform.up * 5f,  ForceMode2D.Force);
+            //playerRB2D.AddForce(playerTransform.up * 25f,  ForceMode2D.Force);
         }
     }
     

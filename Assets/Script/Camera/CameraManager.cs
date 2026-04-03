@@ -20,6 +20,7 @@ public class CameraManager : ActionListManager
     private float DEFAULTDURATION = 1f;
     
     private float currentVelocity;
+    private float shakeForce = 0;
 
     void Start()
     {
@@ -123,6 +124,17 @@ public class CameraManager : ActionListManager
         _camera.orthographicSize = Mathf.MoveTowards(_camera.orthographicSize,  10 + newValue, (currentVelocity) * Time.deltaTime);
     }
 
+    public void AddShakeScreenForce(float force)
+    {
+        shakeForce += force;
+    }
+
+    private Vector2 GetAndUpdateShakeRandomPos()
+    {
+        shakeForce = Mathf.MoveTowards(shakeForce,0, Time.deltaTime);
+        return new Vector2(UnityEngine.Random.Range(-shakeForce, shakeForce),UnityEngine.Random.Range(-shakeForce, shakeForce));
+    }
+    
     private void MoveTowardsTargetWithBoundary(Vector3 targetPosition)
     {
         float left = _camera.ViewportToWorldPoint(new Vector3(0f, 0, 0)).x;
@@ -149,8 +161,9 @@ public class CameraManager : ActionListManager
         float y = Mathf.MoveTowards(_camera.transform.position.y, targetPosition.y, step);
         y = Mathf.Clamp(y, -100f + halfHeight, 100f - halfHeight);
 
+        Vector2 shake = GetAndUpdateShakeRandomPos();
+        Vector3 newPos = new Vector3(x + shake.x,y + shake.y, _camera.transform.position.z);
         
-        Vector3 newPos = new Vector3(x,y, _camera.transform.position.z);
         _camera.transform.position = newPos;
     }
 }
