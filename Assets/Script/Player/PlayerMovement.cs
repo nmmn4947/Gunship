@@ -43,10 +43,20 @@ public class PlayerMovement
         {
             Vector2 finalVelocity = ((Vector2)playerTransform.up * currentSpeed) + knockbackVelocity;
             finalVelocity = Vector2.ClampMagnitude(finalVelocity, currentShip.maxSpeed);
-            playerRB2D.linearVelocity = finalVelocity;
-            
-            //playerRB2D.AddForce(playerTransform.up * 25f,  ForceMode2D.Force);
+            //playerRB2D.linearVelocity = finalVelocity;
+            ApplyLateralDrag();
+            playerRB2D.AddForce(playerTransform.up * currentAcceleration);
+            Debug.Log(playerRB2D.linearVelocity.magnitude);
         }
+    }
+    
+    void ApplyLateralDrag()
+    {
+        // Get the sideways velocity (the component going left/right of car)
+        Vector2 lateralVelocity = playerTransform.right * Vector2.Dot(playerRB2D.linearVelocity, playerTransform.right);
+
+        // Apply a counter-force to resist sliding sideways
+        playerRB2D.AddForce(-lateralVelocity * 25); //25 grippy
     }
     
     public void ApplyKnockback(Vector2 force)
