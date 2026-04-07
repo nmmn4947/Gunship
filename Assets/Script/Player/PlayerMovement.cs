@@ -46,7 +46,6 @@ public class PlayerMovement
             //playerRB2D.linearVelocity = finalVelocity;
             ApplyLateralDrag();
             playerRB2D.AddForce(playerTransform.up * currentAcceleration);
-            Debug.Log(playerRB2D.linearVelocity.magnitude);
         }
     }
     
@@ -56,18 +55,21 @@ public class PlayerMovement
         Vector2 lateralVelocity = playerTransform.right * Vector2.Dot(playerRB2D.linearVelocity, playerTransform.right);
 
         // Apply a counter-force to resist sliding sideways
-        playerRB2D.AddForce(-lateralVelocity * 25); //25 grippy
+        if (isAccelerating)
+        {
+            playerRB2D.AddForce(-lateralVelocity * 25); //25 grippy
+        }
     }
     
-    public void ApplyKnockback(Vector2 force)
+    /*public void ApplyKnockback(Vector2 force)
     {
         knockbackVelocity += force;
-    }
+    }*/
 
     //Jerk -> just to lerp the acceleration
     public void Accelerates(float moveInput, bool isLow)
     {
-        if (currentSpeed > currentShip.maxSpeed)
+        if (playerRB2D.linearVelocity.magnitude > currentShip.maxSpeed)
         {
             isAccelerating = false;
             return;
@@ -111,7 +113,7 @@ public class PlayerMovement
             jerk = moveInput * maxJerk;
         }
 
-        if (currentSpeed < currentShip.maxSpeed)
+        if (playerRB2D.linearVelocity.magnitude < currentShip.maxSpeed)
         {
             currentAcceleration += jerk * Time.fixedDeltaTime;
         }
@@ -121,7 +123,7 @@ public class PlayerMovement
     {
         if (isAccelerating)
         {
-            if (currentSpeed >= currentShip.maxSpeed)
+            if (playerRB2D.linearVelocity.magnitude >= currentShip.maxSpeed)
             {
                 currentAcceleration = 0.0f;
             }
@@ -129,7 +131,9 @@ public class PlayerMovement
         }
 
         currentAcceleration = Mathf.MoveTowards(currentAcceleration, 0.0f, (currentShip.dragForce) * Time.fixedDeltaTime);
-
+        playerRB2D.AddForce(-playerRB2D.linearVelocity.normalized * currentShip.dragForce);
+        
+        
         currentSpeed = Mathf.MoveTowards(currentSpeed, 0.0f, (currentShip.dragForce) * Time.fixedDeltaTime);
         if (currentSpeed > currentShip.maxSpeed)
         {

@@ -23,11 +23,13 @@ public class SimpleDamager : MonoBehaviour
             {
                 health.TakeDamage(damage);
                 //apply knockback
-                Vector2 dir = (Vector2)other.transform.position - (Vector2)this.transform.position;
+                Vector2 dir = ((Vector2)other.transform.position - (Vector2)this.transform.position).normalized;
                 switch (health.combatTeam)
                 {
                     case Health.CombatTeam.Player:
-                        health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 5f);
+                        //health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 5f);
+                        Debug.Log("trig");
+                        health.GetComponent<Rigidbody2D>().AddForce(dir * 10f, ForceMode2D.Impulse);
                         break;
                     case Health.CombatTeam.Enemy:
                         other.GetComponent<Rigidbody2D>().AddForce(dir * 2f, ForceMode2D.Impulse);
@@ -59,10 +61,14 @@ public class SimpleDamager : MonoBehaviour
                 switch (health.combatTeam)
                 {
                     case Health.CombatTeam.Player:
-                        health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 10f);
+                        //health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 10f);
+                        Debug.Log("coll");
+                        health.GetComponent<Rigidbody2D>().AddForce(dir * 10f, ForceMode2D.Impulse);
                         break;
                     case Health.CombatTeam.Enemy:
                         other.gameObject.GetComponent<Rigidbody2D>().AddForce(dir * 2f, ForceMode2D.Impulse);
+                        break;
+                    case Health.CombatTeam.Boss:
                         break;
                 }
                 hitSomething?.Invoke();

@@ -61,7 +61,23 @@ public class PlayerManager : ActionListManager
     {
         base.Update();
         //this.gameObject.transform.position = _spawnedShip.transform.position;
-
+        
+        //if dead
+        if (_isDead)
+        {
+            respawnTimer += Time.unscaledDeltaTime;
+            if (respawnTimer >= respawnTime)
+            {
+                respawnTimer = 0;
+                rb2D.isKinematic = false;
+                _isDead = false;
+                AssignNewShip(0);
+                playerMovement.ResetMovement();
+                playerHealth.ResetHealth();
+            }
+            return;
+        }
+        
         //movement
         if (shiftInput.action.IsPressed())
         {
@@ -98,23 +114,13 @@ public class PlayerManager : ActionListManager
 
         HandlingShipSwitch(); //switching ships
         
-        //if dead
-        if (_isDead)
-        {
-            respawnTimer += Time.unscaledDeltaTime;
-            if (respawnTimer >= respawnTime)
-            {
-                respawnTimer = 0;
-                _isDead = false;
-                AssignNewShip(0);
-                playerMovement.ResetMovement();
-                playerHealth.ResetHealth();
-            }
-        }
+
     }
 
     private void FixedUpdate()
     {
+        if (_isDead) return;
+        
         if (!_isHoldingShift)
         {
             playerMovement.Accelerates(moveInput.action.ReadValue<Vector2>().y, playerHealth.isLowHealth);
@@ -170,6 +176,7 @@ public class PlayerManager : ActionListManager
 
     public void HurtVisual()
     {
+        if (_isDead) return;
         _spawnedShip.GetComponent<PlayerVisualManager>().HurtVisual();
     }
 
@@ -194,6 +201,7 @@ public class PlayerManager : ActionListManager
         Time.timeScale = 1;
         _isDead = true;
         this.transform.position = Vector2.zero;
+        rb2D.isKinematic = true;
         playerMovement.ResetMovement();
     }
 }

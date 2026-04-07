@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Gunship::Health
   currentHealth: 0
-  maxHealth: 7
+  maxHealth: 3
   combatTeam: 1
   onDamaged:
     m_PersistentCalls:

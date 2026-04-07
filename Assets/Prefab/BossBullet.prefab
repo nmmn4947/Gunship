@@ -246,7 +246,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.0063511133}
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.65
 --- !u!50 &4026437061320123968
 Rigidbody2D:
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e6b8114d79d0d41893c6e16f8d2931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Gunship::SimpleDamager
-  damage: 1
+  damage: 3
   combatTeam: 2
   hitSomething:
     m_PersistentCalls:
@@ -316,5 +316,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0dd328031ffeea408b5f4539ef1d22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Gunship::BulletManager
-  speed: 5
+  speed: 10
   lifeTime: 20
