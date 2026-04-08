@@ -15,12 +15,13 @@ MonoBehaviour:
   shipSkinPrefab: {fileID: 3741327757779467363, guid: 8326e2878c839774eb3795cd01e82613, type: 3}
   shipName: Big
   maxSpeed: 7.5
-  maxAcceleration: 3
+  maxAcceleration: 8
   timeUntilMaxAcceleration: 7
-  dragForce: 5
-  torque: 5
+  dragForce: 17.5
+  torque: 20
   pulseMaxPower: 50
   pulseChargeDuration: 4
+  mass: 2.5
   bulletPrefab: {fileID: 3371961621029761184, guid: 317b3f311fb0f324bb84bc967b44f641, type: 3}
   colliderRadius: 1.863993
   maxHealth: 40

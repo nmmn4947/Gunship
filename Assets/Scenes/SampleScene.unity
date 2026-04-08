@@ -128,8 +128,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 213260179}
-  - component: {fileID: 213260182}
-  - component: {fileID: 213260181}
+  - component: {fileID: 213260183}
+  - component: {fileID: 213260184}
   m_Layer: 0
   m_Name: QA
   m_TagString: Untagged
@@ -152,7 +152,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &213260181
+--- !u!114 &213260183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,27 +161,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 213260178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1fe53d8c1a5c1b4a9e4b4a1c3943763, type: 3}
+  m_Script: {fileID: 11500000, guid: 6defd10b41174e24b834fc6be4c4f716, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Gunship::Telemetry
-  _performance: {fileID: 213260182}
-  telemetryData: {fileID: 11400000, guid: f22a07a02bf4f3148aa2ebe3807b0034, type: 2}
---- !u!114 &213260182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213260178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7141a4f93ed0d994285050fbf71ac0e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Gunship::FramePerformance
+  m_EditorClassIdentifier: Gunship::CardProject.TelemetryGenerator
   realTimeMEAN: 0
   realTimeMEDIAN: 0
   realTimeWorst: 0
   frameCountEachSecond: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  noTelemetry: 0
+--- !u!114 &213260184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213260178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885463def02daff489f179643cf4610c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::AutoMatedTest
+  inputs: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  isTesting: 0
+  accelerationInput: 0
+  turnInput: 0
+  missileInput: 0
 --- !u!1 &228570701
 GameObject:
   m_ObjectHideFlags: 0
@@ -5823,6 +5827,7 @@ MonoBehaviour:
   shootfrequencyTime: 0.1
   shootDuration: 0.7
   cooldownTime: 5
+  timerCooldown: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7030,6 +7035,10 @@ MonoBehaviour:
   player: {fileID: 1931120215}
   deadBulletTime: 3
   isDead: 0
+  bossHealth: {fileID: 1650473243}
+  enmshpspwnr: {fileID: 1862074152}
+  cg: {fileID: 1934315957}
+  strgnbltspwnr: {fileID: 511676151}
 --- !u!50 &1025482544
 Rigidbody2D:
   serializedVersion: 5
@@ -7396,7 +7405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Gunship::CardProject.DebugPerformance
   _meshProUGUI: {fileID: 3737781511983112679}
-  _framePerformance: {fileID: 213260182}
 --- !u!1 &1170303032
 GameObject:
   m_ObjectHideFlags: 0
@@ -8988,7 +8996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1757989834
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9022,6 +9030,7 @@ GameObject:
   - component: {fileID: 1862074150}
   - component: {fileID: 1862074151}
   - component: {fileID: 1862074152}
+  - component: {fileID: 1862074153}
   m_Layer: 6
   m_Name: Backs
   m_TagString: Untagged
@@ -9226,6 +9235,24 @@ MonoBehaviour:
   - {fileID: 984785235}
   - {fileID: 997609631}
   cooldownTime: 30
+  timer: 0
+--- !u!114 &1862074153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862074147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e6b8114d79d0d41893c6e16f8d2931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gunship::SimpleDamager
+  damage: 3
+  combatTeam: 2
+  hitSomething:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1889679864
 GameObject:
   m_ObjectHideFlags: 0
@@ -9539,6 +9566,7 @@ MonoBehaviour:
   playerHealth: {fileID: 1931120221}
   explosionParticle: {fileID: 752714144713258881, guid: f925385806e5572458b0e5d1db644fae, type: 3}
   respawnTime: 5
+  _autoMatedTest: {fileID: 213260184}
   _currentShipData: {fileID: 0}
   _spawnedShip: {fileID: 0}
 --- !u!50 &1931120219
@@ -9902,7 +9930,9 @@ MonoBehaviour:
   maxScaleBulletMultiplier: 4
   gunSkinTransform: {fileID: 1101746359}
   chargeDuration: 3
+  timerCharge: 0
   cooldownDuration: 7
+  timerCooldown: 0
 --- !u!1 &2007581941
 GameObject:
   m_ObjectHideFlags: 0

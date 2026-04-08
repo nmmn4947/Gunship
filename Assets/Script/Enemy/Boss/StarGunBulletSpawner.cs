@@ -14,7 +14,7 @@ public class StarGunBulletSpawner : MonoBehaviour
     [SerializeField] private float shootDuration;
     private float timerShoot = 0;
     [SerializeField] private float cooldownTime;
-    private float timerCooldown = 0;
+    [HideInInspector] public float timerCooldown = 0;
 
     private void Update()
     {

@@ -7,8 +7,8 @@ public class PlayerChaingun
     private float timer;
     private GameObject playerObj;
     private bool pressedOnce;
-    private float currentMultiplier;
-    
+    public float currentMultiplier;
+
     public void SetUp(GameObject player, ShipData shipData)
     {
         playerObj = player;

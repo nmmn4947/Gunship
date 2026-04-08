@@ -9,9 +9,9 @@ public class ChargeGun : MonoBehaviour
     [SerializeField] private Transform gunSkinTransform;
     
     [SerializeField] private float chargeDuration;
-    float timerCharge = 0;
+    [HideInInspector] public float timerCharge = 0;
     [SerializeField] private float cooldownDuration;
-    float timerCooldown = 0;
+    [HideInInspector] public float timerCooldown = 0;
     
     GameObject spwnd = null;
     BulletManager bulletManager = null;

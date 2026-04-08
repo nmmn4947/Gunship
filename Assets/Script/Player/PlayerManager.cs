@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CardProject;
 using Napadol.Tools;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,7 @@ public class PlayerManager : ActionListManager
     [SerializeField] private Health playerHealth;
     [SerializeField] private GameObject explosionParticle;
     [SerializeField] private float respawnTime;
+    [SerializeField] private AutoMatedTest _autoMatedTest;
 
     public PlayerMovement playerMovement = new PlayerMovement();
     private PlayerChaingun playerChaingun = new PlayerChaingun();
@@ -25,6 +27,7 @@ public class PlayerManager : ActionListManager
     private bool _isAutomatedTest;
     private bool _isHoldingShift = false;
     private bool _isDead = false;
+    private bool _isMissileSpawn = false;
     private float respawnTimer = 0;
     private Rigidbody2D rb2D;
     private CircleCollider2D playerCollider;
@@ -55,13 +58,13 @@ public class PlayerManager : ActionListManager
         rb2D = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CircleCollider2D>();
         AssignNewShip(0);
+        TelemetryGenerator.instance.Logging += HandleTelemetry;
     }
 
     protected override void Update()
     {
         base.Update();
-        //this.gameObject.transform.position = _spawnedShip.transform.position;
-        
+
         //if dead
         if (_isDead)
         {
@@ -71,13 +74,39 @@ public class PlayerManager : ActionListManager
                 respawnTimer = 0;
                 rb2D.isKinematic = false;
                 _isDead = false;
-                AssignNewShip(0);
+                AssignNewShip(UnityEngine.Random.Range(0, allShips.Count));
                 playerMovement.ResetMovement();
                 playerHealth.ResetHealth();
             }
             return;
         }
+
+        if (!_autoMatedTest.isTesting)
+        {
+            PlayerUpdate();
+        }
+        else
+        {
+            AutomatedTestUpdate();
+        }
+
+        HandlingShipSwitch(); //switching ships
         
+        //regen
+        if (!playerHealth.IsMaxHealth())
+        {
+            regenTimer += Time.unscaledDeltaTime;
+        }
+        if (regenTimer >= _currentShipData.regenCooldown)
+        {
+            playerHealth.Heal(_currentShipData.regenAmount);
+            regenTimer = 0f;
+        }
+        UpdateLowHealthEffect();
+    }
+
+    private void PlayerUpdate()
+    {
         //movement
         if (shiftInput.action.IsPressed())
         {
@@ -95,32 +124,47 @@ public class PlayerManager : ActionListManager
         playerChaingun.UpdateGun();
         if (enterInput.action.IsPressed())
         {
+            _isMissileSpawn = true;
             playerMissiles.SpawnMissiles();
         }
-
-        //regen
-        if (!playerHealth.IsMaxHealth())
+        else
         {
-            regenTimer += Time.unscaledDeltaTime;
+            _isMissileSpawn = false;
         }
+    }
 
-        if (regenTimer >= _currentShipData.regenCooldown)
+    private void AutomatedTestUpdate()
+    {
+        //Combat
+        playerChaingun.RampHandlingChainGun(true);
+        playerChaingun.UpdateGun();
+        if (_autoMatedTest.missileInput)
         {
-            playerHealth.Heal(_currentShipData.regenAmount);
-            regenTimer = 0f;
+            _isMissileSpawn = true;
+            playerMissiles.SpawnMissiles();
         }
-
-        UpdateLowHealthEffect();
-
-        HandlingShipSwitch(); //switching ships
-        
-
+        else
+        {
+            _isMissileSpawn = false;
+        }
     }
 
     private void FixedUpdate()
     {
         if (_isDead) return;
-        
+
+        if (!_autoMatedTest.isTesting)
+        {
+            PlayerFixedUpdate();
+        }
+        else
+        {
+            AutomatedTestFixedUpdate();
+        }
+    }
+
+    private void PlayerFixedUpdate()
+    {
         if (!_isHoldingShift)
         {
             playerMovement.Accelerates(moveInput.action.ReadValue<Vector2>().y, playerHealth.isLowHealth);
@@ -128,6 +172,18 @@ public class PlayerManager : ActionListManager
 
         playerMovement.AngularAccelerates(moveInput.action.ReadValue<Vector2>().x, playerHealth.isLowHealth);
         playerMovement.UpdateMovement();
+    }
+    
+    private void AutomatedTestFixedUpdate()
+    {
+        playerMovement.Accelerates(_autoMatedTest.accelerationInput, playerHealth.isLowHealth);
+        playerMovement.AngularAccelerates(_autoMatedTest.turnInput, playerHealth.isLowHealth);
+        playerMovement.UpdateMovement();
+    }
+
+    public void ApplyKnockback(Vector2 f)
+    {
+        rb2D.AddForce(f, ForceMode2D.Impulse);
     }
 
     private void HandlingShipSwitch()
@@ -169,9 +225,13 @@ public class PlayerManager : ActionListManager
 
         playerHealth.maxHealth = (_currentShipData.maxHealth);
         playerHealth.FullHeal();
+        
+        rb2D.mass = _currentShipData.mass;
 
         string s = _spawnedShip.gameObject.name.Replace("(Clone)", "");
         AnnouncerManager.instance.SpawnSomething(s);
+        
+        TelemetryGenerator.instance.Log();
     }
 
     public void HurtVisual()
@@ -203,5 +263,12 @@ public class PlayerManager : ActionListManager
         this.transform.position = Vector2.zero;
         rb2D.isKinematic = true;
         playerMovement.ResetMovement();
+        TelemetryGenerator.instance.Log();
+    }
+
+    public void HandleTelemetry()
+    {
+        TelemetryGenerator.instance.PlayerTelemetryData(playerHealth.currentHealth, this.transform.position, rb2D.linearVelocity.magnitude,
+            this.transform.rotation.eulerAngles, playerChaingun.currentMultiplier, _isMissileSpawn);
     }
 }

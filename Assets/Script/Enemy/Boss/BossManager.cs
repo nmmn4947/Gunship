@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using CardProject;
 using UnityEngine;
 using Napadol.Tools;
 
@@ -11,18 +12,25 @@ public class BossManager : MonoBehaviour
     [SerializeField] private GameObject rightPart;
     [SerializeField] private GameObject player;
     [SerializeField] private float deadBulletTime;
-
-
-    [HideInInspector] public bool isDead = false;
     
-    private BossMovement bossMovement = new BossMovement();
+    [HideInInspector] public bool isDead = false;
     private MissileMovement mm;
 
+    [SerializeField] private Health bossHealth;
+    private Rigidbody2D rb2D;
+    private bool backsIsAttached = true;
+    [SerializeField] private EnemyShipSpawner enmshpspwnr; 
+    private bool leftIsAttached = true;
+    [SerializeField] private ChargeGun cg;
+    private bool rightIsAttached = true;
+    [SerializeField] private StarGunBulletSpawner strgnbltspwnr;
     private float timer = 0f;
 
     private void Start()
     {
         mm = GetComponent<MissileMovement>();
+        rb2D = GetComponent<Rigidbody2D>();
+        TelemetryGenerator.instance.Logging += HandleTelemetry;
     }
 
     public void DisconnectParts(GameObject part)
@@ -31,6 +39,19 @@ public class BossManager : MonoBehaviour
         mm.AddAcceleration(2);
         mm.AddMaxSpeed(4);
         StartCoroutine(RunDisconnectParts(part));
+        switch (part.name)
+        {
+            case "Backs":
+                backsIsAttached = false;
+                break;
+            case "Left":
+                leftIsAttached = false;
+                break;
+            case "Right":
+                rightIsAttached = false;
+                break;
+        }
+        TelemetryGenerator.instance.Log();
     }
 
     private IEnumerator RunDisconnectParts(GameObject part)
@@ -57,6 +78,7 @@ public class BossManager : MonoBehaviour
     public void BossDiedTimeSlowDown()
     {
         isDead = true;
+        TelemetryGenerator.instance.Log();
         StartCoroutine(SlowTimeOnDeath());
     }
 
@@ -70,5 +92,13 @@ public class BossManager : MonoBehaviour
         }
         
         Time.timeScale = 1f;
+    }
+
+    private void HandleTelemetry()
+    {
+        TelemetryGenerator.instance.BossTelemetryData(bossHealth.currentHealth, this.transform.position,rb2D.linearVelocity.magnitude, 
+            backsIsAttached, enmshpspwnr.timer,
+            leftIsAttached, cg.timerCharge, cg.timerCooldown,
+            rightIsAttached, strgnbltspwnr.timerCooldown);
     }
 }

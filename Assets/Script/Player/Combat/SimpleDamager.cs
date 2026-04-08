@@ -28,7 +28,6 @@ public class SimpleDamager : MonoBehaviour
                 {
                     case Health.CombatTeam.Player:
                         //health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 5f);
-                        Debug.Log("trig");
                         health.GetComponent<Rigidbody2D>().AddForce(dir * 10f, ForceMode2D.Impulse);
                         break;
                     case Health.CombatTeam.Enemy:
@@ -62,7 +61,6 @@ public class SimpleDamager : MonoBehaviour
                 {
                     case Health.CombatTeam.Player:
                         //health.GetComponent<PlayerManager>().playerMovement.ApplyKnockback(dir * 10f);
-                        Debug.Log("coll");
                         health.GetComponent<Rigidbody2D>().AddForce(dir * 10f, ForceMode2D.Impulse);
                         break;
                     case Health.CombatTeam.Enemy:

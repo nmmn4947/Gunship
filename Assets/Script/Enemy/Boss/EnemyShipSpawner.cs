@@ -10,8 +10,8 @@ public class EnemyShipSpawner : MonoBehaviour
     private int spawnPointRotater = 0;
 
     [SerializeField] private float cooldownTime;
-    private float timer = 0f;
-
+    [HideInInspector] public float timer = 0f;
+    
     private void Start()
     {
         SpawnEnemyShip();

@@ -14,6 +14,7 @@ public class ShipData : ScriptableObject
     public float torque;
     public float pulseMaxPower;
     public float pulseChargeDuration;
+    public float mass;
 
     [Header("Combat General")] 
     public GameObject bulletPrefab;

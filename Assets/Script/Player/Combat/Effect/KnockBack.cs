@@ -24,7 +24,7 @@ public class KnockBack : MonoBehaviour
                 thisTransform = new Vector2(other.transform.position.x, thisTransform.y);
             }
             Vector2 dir = (Vector2)other.transform.position - thisTransform;
-            //pm.playerMovement.ApplyKnockback(dir * force);
+            pm.ApplyKnockback(dir * force);
         }
     }
     
@@ -43,7 +43,7 @@ public class KnockBack : MonoBehaviour
                 thisTransform = new Vector2(other.transform.position.x, thisTransform.y);
             }
             Vector2 dir = (Vector2)other.transform.position - thisTransform;
-            //pm.playerMovement.ApplyKnockback(dir * force);
+            pm.ApplyKnockback(dir * force);
         }
     }
     

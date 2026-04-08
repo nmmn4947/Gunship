@@ -9,7 +9,7 @@ public class PlayerMissiles : MonoBehaviour
     [SerializeField] private GameObject missilePrefab;
     [SerializeField] private float missileCooldown;
     private float timer = 0;
-    private bool isOnCooldown = false;
+    [HideInInspector] public bool isOnCooldown = false;
 
     public void SpawnMissiles()
     {
@@ -22,6 +22,7 @@ public class PlayerMissiles : MonoBehaviour
             Instantiate(missilePrefab, spawnPoint.position, spawnPoint.rotation);
         }
         isOnCooldown = true;
+        TelemetryGenerator.instance.Log();
     }
 
     private void Update()
