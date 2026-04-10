@@ -169,7 +169,7 @@ public class PlayerManager : ActionListManager
         {
             playerMovement.Accelerates(moveInput.action.ReadValue<Vector2>().y, playerHealth.isLowHealth);
         }
-
+        
         playerMovement.AngularAccelerates(moveInput.action.ReadValue<Vector2>().x, playerHealth.isLowHealth);
         playerMovement.UpdateMovement();
     }
