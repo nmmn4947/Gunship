@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e6b8114d79d0d41893c6e16f8d2931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Gunship::SimpleDamager
-  damage: 3
+  damage: 1
   combatTeam: 0
   hitSomething:
     m_PersistentCalls:

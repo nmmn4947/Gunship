@@ -31,7 +31,9 @@ public class ShipData : ScriptableObject
     public float rampDownStepMultiplier;
     public float maxConeShotOffset = 0.5f;
 
-    [Header("Missiles")] 
-    public int missileCount;
+    [Header("QA")] 
+    public float lookAndShootDuration;
+    public float moveAroundDuration;
+    public int percentToTurn;
 
 }

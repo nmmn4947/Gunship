@@ -20,7 +20,7 @@ public class AutoMatedTest : MonoBehaviour
     }
     private float ltbDuration = 5f;
     private float ltbTimer = 0f;
-    private float mvabDuration = 5f;
+    private float mvabDuration = 3.5f;
     private float mvabTimer = 0f;
 
     private Sequence currentSequence;
@@ -40,6 +40,9 @@ public class AutoMatedTest : MonoBehaviour
             isTesting = !isTesting;
             InputEnabling(isTesting);
         }
+
+        ltbDuration = playerManager._currentShipData.lookAndShootDuration;
+        mvabDuration = playerManager._currentShipData.moveAroundDuration;
         
         if (!isTesting) return;
         
@@ -135,8 +138,8 @@ public class AutoMatedTest : MonoBehaviour
         {
             accelerationInput = 0f;
         }
-
-        if (randTurn < 10)
+        
+        if (randTurn < playerManager._currentShipData.percentToTurn)
         {
             turnInput = lazy[theTurnWay];
         }

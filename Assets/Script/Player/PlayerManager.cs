@@ -183,7 +183,18 @@ public class PlayerManager : ActionListManager
 
     public void ApplyKnockback(Vector2 f)
     {
-        rb2D.AddForce(f, ForceMode2D.Impulse);
+        if (_currentShipData == allShips[0])
+        {
+            rb2D.AddForce(f, ForceMode2D.Impulse);
+        }
+        else if (_currentShipData == allShips[1])
+        {
+            rb2D.AddForce(f/2, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb2D.AddForce(f/5, ForceMode2D.Impulse);
+        }
     }
 
     private void HandlingShipSwitch()

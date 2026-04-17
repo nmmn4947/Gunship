@@ -18,7 +18,7 @@ MonoBehaviour:
   maxAcceleration: 4.5
   timeUntilMaxAcceleration: 1.75
   dragForce: 12.5
-  torque: 9
+  torque: 12
   pulseMaxPower: 35
   pulseChargeDuration: 2
   mass: 1.5
@@ -32,4 +32,6 @@ MonoBehaviour:
   rampUpStepMultiplier: 0.35
   rampDownStepMultiplier: 1
   maxConeShotOffset: 0.25
-  missileCount: 0
+  lookAndShootDuration: 5
+  moveAroundDuration: 6
+  percentToTurn: 30

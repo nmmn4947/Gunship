@@ -32,4 +32,6 @@ MonoBehaviour:
   rampUpStepMultiplier: 0.5
   rampDownStepMultiplier: 1
   maxConeShotOffset: 0.1
-  missileCount: 0
+  lookAndShootDuration: 5
+  moveAroundDuration: 3
+  percentToTurn: 8
